@@ -1,14 +1,15 @@
 import "./style.css";
 import ProfileIcon from "../../assets/icons/profileIcon";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const ProfileContextMenu = ({ user }) => {
-    const navigate = useNavigate();
+// ----- USE NAVIGATE TO BE IMPLEMENTED WHEN ROUTE EXISTS --------------
+    // const navigate = useNavigate();
 
     return (
         <div className="menu-wrapper">
             <div
-                onClick={navigate(`/users/${user.id}`)}
+                // onClick={navigate(`/users/${user.id}`)}
                 className="profile-context-menu"
             >
                 <ProfileIcon />
