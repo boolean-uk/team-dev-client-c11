@@ -17,6 +17,7 @@
 
 .profile-context-menu:hover {
   background-color: #F5FAFF;
+  cursor: pointer;
 }
 
 .profile-text {
