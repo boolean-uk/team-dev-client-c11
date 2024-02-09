@@ -1,7 +1,6 @@
 import "./style.css";
 import ProfileIcon from "../../assets/icons/profileIcon";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 const ProfileContextMenu = ({ user }) => {
     
