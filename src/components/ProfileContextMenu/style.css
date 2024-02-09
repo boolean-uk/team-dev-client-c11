@@ -1,7 +1,11 @@
+.menu-wrapper {
+  position: fixed;
+}
+
 .profile-context-menu {
   position: absolute;
   z-index: 1;
-  right: 105px;
+  left: 65px;
 
   display: grid;
   grid-template-columns: 50px 1fr;
