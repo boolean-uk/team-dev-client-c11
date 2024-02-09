@@ -31,9 +31,10 @@ const UserCard = ({ user, contextMenu }) => {
                             setTriggerContextMenu(!triggerContextMenu)
                         }
                     />
+                    {triggerContextMenu ? <ProfileContextMenu user={user} /> : ""}
                 </div>
             </section>
-            {triggerContextMenu ? <ProfileContextMenu user={user} /> : ""}
+            
         </>
     );
 };
