@@ -2,9 +2,11 @@ import Button from "../../components/button";
 import TickIcon from "../../assets/tickIcon";
 import "./verification.css";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Verification = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const onContinueClick = () => {
     navigate("/welcome");
@@ -14,20 +16,19 @@ const Verification = () => {
     <div className="bg-blue verify credentialpage">
       <div className="bg-white verify-card">
         <TickIcon />
-        <h1 className="h3">Welcome to Cohort Manager</h1>
+        <h1 className="h3">{t("welcome")}</h1>
         <div className="text-blue1">
           <p className="text-medium">
-            We have sent you a verification email to check and confirm your
-            email address.
+            {t("emailSent")}
           </p>
           <br />
           <p className="text-medium">
-            Please follow the link in the email to log in to Cohort Manager.
+            {t("followLinkToLogin")}
           </p>
         </div>
         <div className="verify-card-buttons">
-          <Button text="Resend email" classes="offwhite" />
-          <Button text="Continue" onClick={onContinueClick} classes="green" />
+          <Button text={t("resendEmail")} classes="offwhite" />
+          <Button text={t("continue")} onClick={onContinueClick} classes="green" />
         </div>
       </div>
     </div>

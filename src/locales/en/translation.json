@@ -79,5 +79,9 @@
   "units": "Units",
   "uploadValidImage": "Please upload a valid image file",
   "welcome": "Welcome to Cohort Manager",
-  "whatsOnYourMind": "What's on your mind?"
+  "whatsOnYourMind": "What's on your mind?",
+  "emailSent": "We have sent you a verification email to check and confirm your email address.",
+  "followLinkToLogin": "Please follow the link in the email to log in to Cohort Manager.",
+  "resendEmail": "Resend email",
+  "continue": "Continue"
 }

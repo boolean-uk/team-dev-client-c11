@@ -79,5 +79,9 @@
   "units": "Enheter",
   "uploadValidImage": "Ladda upp en giltig bildfil",
   "welcome": "Välkommen till Cohort Manager",
-  "whatsOnYourMind": "Vad tänker du på?"
+  "whatsOnYourMind": "Vad tänker du på?",
+  "emailSent": "Vi har skickat en verifierings-e-post till dig för att kontrollera och bekräfta din e-postadress.",
+  "followLinkToLogin": "Följ länken i e-postmeddelandet för att logga in på Cohort Manager.",
+  "resendEmail": "Skicka e-post igen",
+  "continue": "Fortsätt"
 }
