@@ -43,6 +43,11 @@ async function postComment(comment) {
   return res.data
 }
 
+async function getCohorts() {
+  const res = await get("cohorts")
+  return res.data
+}
+
 async function post(endpoint, data, auth = true) {
   return await request("POST", endpoint, data, auth)
 }
@@ -121,4 +126,5 @@ export {
   postComment,
   getCommentsByPostId,
   getSelf,
+  getCohorts
 }

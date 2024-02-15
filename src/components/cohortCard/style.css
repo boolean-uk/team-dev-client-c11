@@ -1,0 +1,40 @@
+.cohort-card {
+  display: grid;
+  grid-template-columns: 60px 100px;
+  grid-template-rows: 1fr;
+  gap: 15px;
+}
+
+.cohort-card .profile-circle{
+  place-self: center;
+  display: grid;
+}
+
+.cohort-card .profile-icon{
+  background-color: rgb(127, 228, 127);
+}
+
+.cohort-card .profile-icon > p {
+  font-size: 32px;
+  color: white;
+}
+
+.cohort-card:hover {
+  background-color: #f5faff;
+}
+
+.cohort-card-info {
+  display: grid;
+  align-items: center;
+}
+
+.cohort-card-department {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.cohort-card-name {
+  font-size: 16px;
+  font-weight: 400;
+  color: #64648c;
+}

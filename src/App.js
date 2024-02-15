@@ -9,6 +9,7 @@ import { AuthProvider, ProtectedRoute } from "./context/auth"
 import { ModalProvider } from "./context/modal"
 import Welcome from "./pages/welcome"
 import MyCohort from "./pages/myCohort"
+import Cohorts from "./pages/cohorts"
 import UserSearchResult from "./pages/UserSearchResult"
 
 const App = () => {
@@ -36,6 +37,14 @@ const App = () => {
               element={
                 <ProtectedRoute>
                   <MyCohort />
+                </ProtectedRoute>
+              }
+            />
+             <Route
+              path="cohorts"
+              element={
+                <ProtectedRoute>
+                  <Cohorts/>
                 </ProtectedRoute>
               }
             />
