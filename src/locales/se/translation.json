@@ -16,6 +16,7 @@
   "cohort": "Kohort",
   "comment": "Kommentera",
   "contactInfo": "Contact Info",
+  "continue": "Fortsätt",
   "countAndCompleted": "Klar {{completedTasks}}/{{totalTasks}}",
   "createAPost": "Skapa ett inlägg",
   "createProfile": "Skapa profil",
@@ -27,6 +28,7 @@
   "editSearch": "Inga resultat",
   "editYourPost": "Redigera ditt inlägg",
   "email": "E-post",
+  "emailSent": "Vi har skickat en verifierings-e-post till dig för att kontrollera och bekräfta din e-postadress.",
   "enterCharacter": "Ange 3 eller fler tecken",
   "enterYourFirstName": "Ange ditt förnamn",
   "enterYourGithubUser": "Ange ditt GitHub-användarnamn",
@@ -37,6 +39,7 @@
   "failedToEditPost": "Misslyckades att redigera inlägget. Försök igen.",
   "firstLike": "Var den första att gilla detta",
   "firstName": "Förnamn",
+  "followLinkToLogin": "Följ länken i e-postmeddelandet för att logga in på Cohort Manager.",
   "frontendDevelopment": "Frontendutveckling",
   "getStarted": "Skapa din profil för att komma igång",
   "githubUserName": "Github-användarnamn",
@@ -67,6 +70,7 @@
   "profile": "Profil",
   "required": "Obligatorisk",
   "requiredFields": "Fyll i alla obligatoriska fält",
+  "resendEmail": "Skicka e-post igen",
   "searchResults": "Sökresultat",
   "seeExercises": "Visa övningar",
   "sendMessage": "Skicka meddelande",
@@ -79,9 +83,5 @@
   "units": "Enheter",
   "uploadValidImage": "Ladda upp en giltig bildfil",
   "welcome": "Välkommen till Cohort Manager",
-  "whatsOnYourMind": "Vad tänker du på?",
-  "emailSent": "Vi har skickat en verifierings-e-post till dig för att kontrollera och bekräfta din e-postadress.",
-  "followLinkToLogin": "Följ länken i e-postmeddelandet för att logga in på Cohort Manager.",
-  "resendEmail": "Skicka e-post igen",
-  "continue": "Fortsätt"
+  "whatsOnYourMind": "Vad tänker du på?"
 }
