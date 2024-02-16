@@ -6,7 +6,7 @@ import "./style.css"
 import { useTranslation } from "react-i18next"
 
 const Navigation = () => {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   return (
     <nav>
       <ul>
@@ -17,7 +17,7 @@ const Navigation = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/">
+          <NavLink to="/profile/1">
             <ProfileIcon />
             <p>{t("profile")}</p>
           </NavLink>

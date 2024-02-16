@@ -11,6 +11,8 @@ import Welcome from "./pages/welcome"
 import MyCohort from "./pages/myCohort"
 import Cohorts from "./pages/cohorts"
 import UserSearchResult from "./pages/UserSearchResult"
+import UserProfile from "./pages/userProfile"
+
 
 const App = () => {
   return (
@@ -22,6 +24,15 @@ const App = () => {
             <Route path="register" element={<Register />} />
             <Route path="loading" element={<Loading />} />
             <Route path="verification" element={<Verification />} />
+
+            <Route
+              path="profile/:id"
+              element={
+                <ProtectedRoute>
+                  <UserProfile />
+                </ProtectedRoute>
+              }
+            />
 
             <Route
               index
@@ -40,11 +51,11 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
-             <Route
+            <Route
               path="cohorts"
               element={
                 <ProtectedRoute>
-                  <Cohorts/>
+                  <Cohorts />
                 </ProtectedRoute>
               }
             />
