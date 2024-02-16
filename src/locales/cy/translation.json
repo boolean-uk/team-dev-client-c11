@@ -53,5 +53,7 @@
   "submit": "Cyflwyno",
   "teachers": "Athrawon",
   "units": "unedau",
-  "welcome": "Croeso i Cohort Manager"
+  "welcome": "Croeso i Cohort Manager",
+  "profileImageUrl": "URL delwedd proffil",
+  "enterProfileImageUrl": "Rhowch eich URL delwedd proffil"
 }

@@ -82,5 +82,7 @@
   "uploadValidImage": "Please upload a valid image file",
   "userExist": "Already a user?",
   "welcome": "Welcome to Cohort Manager",
-  "whatsOnYourMind": "What's on your mind?"
+  "whatsOnYourMind": "What's on your mind?",
+  "profileImageUrl": "Profile image URL",
+  "enterProfileImageUrl": "Enter your profile image URL"
 }

@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react"
 import Form from "../../../components/form"
 import TextInput from "../../../components/form/textInput"
+import { useTranslation } from "react-i18next"
 
 const StepThree = ({ data, setData, message, setCanProgress, setMessage }) => {
+  
+  const { t } = useTranslation()
   const [isRoleValid, setIsRoleValid] = useState(false)
   const [isSpecialismValid, setIsSpecialismValid] = useState(false)
   const [isCohortValid, setIsCohortValid] = useState(false)

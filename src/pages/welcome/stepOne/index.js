@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react"
-import ProfileIcon from "../../../assets/icons/profileIcon"
 import Form from "../../../components/form"
 import TextInput from "../../../components/form/textInput"
 import { useTranslation } from "react-i18next"
@@ -48,24 +47,20 @@ const StepOne = ({ data, setData, setCanProgress, message, setMessage }) => {
         <h3>{t("basicInfo")}</h3>
       </div>
       <Form className="welcome-form">
-        <div className="welcome-form-profileimg">
-          <p className="text-blue1">{t("photo")}</p>
-          <div className="welcome-form-profileimg-input">
-            <ProfileIcon colour="#28C846" background="#64DC78" />
-
-            <p className="text-blue1">{t("addHeadShot")}</p>
-          </div>
-          <p className="welcome-form-profileimg-error">
-            {t("uploadValidImage")}
-          </p>
-        </div>
         <div className="welcome-form-inputs">
+          <TextInput
+            onChange={onInput}
+            value={data.imageUrl}
+            name="imageUrl"
+            label={`${t("profileImageUrl")}`}
+            placeholder={`${t("enterProfileImageUrl")}`}
+          />
           <TextInput
             onChange={onInput}
             value={data.firstName}
             name="firstName"
             label={`${t("firstName")} *`}
-            placeholder={`${t("enterYourFirstName")} *`}
+            placeholder={`${t("enterYourFirstName")}`}
             required
           />
           <TextInput
@@ -73,7 +68,7 @@ const StepOne = ({ data, setData, setCanProgress, message, setMessage }) => {
             value={data.lastName}
             name="lastName"
             label={`${t("lastName")} *`}
-            placeholder={`${t("enterYourLastName")} *`}
+            placeholder={`${t("enterYourLastName")}`}
             required
           />
           <TextInput

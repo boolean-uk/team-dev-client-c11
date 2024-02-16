@@ -10,7 +10,7 @@ const Login = () => {
   const { onLogin } = useAuth()
   const [formData, setFormData] = useState({ email: "", password: "" })
   const [loginMessage, setLoginMessage] = useState("")
-  const {t} = useTranslation()
+  const { t } = useTranslation()
 
   const onChange = (e) => {
     const { name, value } = e.target
@@ -28,7 +28,7 @@ const Login = () => {
   return (
     <div className="bg-blue login credentialpage">
       <CredentialsCard
-        title={t('login')}
+        title={t("login")}
         socialLinksTitle={t("loginAlternative")}
         altButtonTitle={t("needOtherAccount")}
         altButtonLink="/register"
@@ -40,13 +40,13 @@ const Login = () => {
               value={formData.email}
               onChange={onChange}
               name="email"
-              label={`${t('email')} *`}
+              label={`${t("email")} *`}
             />
             <TextInput
               value={formData.password}
               onChange={onChange}
               name="password"
-              label={`${t('password')} *`}
+              label={`${t("password")} *`}
               type={"password"}
             />
           </form>

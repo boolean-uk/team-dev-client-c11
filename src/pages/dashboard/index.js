@@ -12,10 +12,10 @@ import CohortList from "../../components/cohortList"
 import { useTranslation } from "react-i18next"
 
 const Dashboard = () => {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
 
   const [posts, setPosts] = useState([])
-  const [users, setUsers] = useState([])
+  const [myCohort, setMyCohort] = useState([])
   const [cohorts, setCohorts] = useState(null)
 
   const sortPosts = (fetchedPosts) => {
@@ -35,34 +35,41 @@ const Dashboard = () => {
   }
 
   const getAllUsers = () => {
-    getUsers().then(setUsers)
+    getUsers().then(setMyCohort)
   }
-  
+
   const getAllCohorts = () => {
     getCohorts().then(setCohorts)
   }
-  
+
   useEffect(getAllPosts, [])
   useEffect(getAllUsers, [])
   useEffect(getAllCohorts, [])
-  
+
   const { openModal, setModal } = useModal()
-  
+
   const showModal = () => {
-    setModal(`${t('createAPost')}`, <CreatePostModal getAllPosts={getAllPosts} />)
+    setModal(
+      `${t("createAPost")}`,
+      <CreatePostModal getAllPosts={getAllPosts} />
+    )
 
     openModal()
   }
-  
-  const shouldRenderCohortList = () => Array.isArray(cohorts)
 
-  const showCohorts = () => {
-    if (!shouldRenderCohortList()) {
-      return <></>
+  const shouldRenderList = (list) => Array.isArray(list)
+
+  const showAllCohortsOrMine = () => {
+    if (shouldRenderList(cohorts)) {
+      return (
+        <Card header={t("Cohorts")}>
+          <CohortList cohorts={cohorts} />
+        </Card>
+      )
     }
     return (
-      <Card header={t('Cohorts')}>
-        <CohortList cohorts={cohorts} />
+      <Card header={t("myCohort")}>
+        <UsersList users={myCohort} />
       </Card>
     )
   }
@@ -75,7 +82,7 @@ const Dashboard = () => {
             <div className="profile-icon">
               <p>AJ</p>
             </div>
-            <Button text={t('whatsOnYourMind')} onClick={showModal} />
+            <Button text={t("whatsOnYourMind")} onClick={showModal} />
           </div>
         </Card>
 
@@ -83,10 +90,7 @@ const Dashboard = () => {
       </main>
       <aside>
         <SearchUserAside />
-        <Card header={t('myCohort')}>
-          <UsersList users={users} />
-        </Card>
-        {showCohorts()}
+        {showAllCohortsOrMine()}
       </aside>
     </>
   )
