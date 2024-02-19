@@ -5,7 +5,7 @@ import CreatePostModal from "../../components/createPostModal"
 import Posts from "../../components/posts"
 import useModal from "../../hooks/useModal"
 import "./style.css"
-import { getCohorts, getPosts, getUsers } from "../../service/apiClient"
+import { getCohorts, getPosts, getSelf, getStudentsByCohortId } from "../../service/apiClient"
 import UsersList from "../../components/usersList"
 import SearchUserAside from "../../components/searchUserAside"
 import CohortList from "../../components/cohortList"
@@ -34,19 +34,38 @@ const Dashboard = () => {
       })
   }
 
-  const getAllUsers = () => {
-    getUsers().then(setMyCohort)
-  }
+  // const getAllUsers = () => {
+  //   getUsers().then(setMyCohort)
+  // }
 
   const getAllCohorts = () => {
     getCohorts().then(setCohorts)
   }
 
+  const isInACohort = () =>
+    getSelf().then((user) => {
+      if (!user.cohortId) {
+        throw new Error("no cohort assigned to the current user")
+      }
+      return user.cohortId
+    })
+
+  const getStudentsInMyCohort = () => {
+    isInACohort()
+      .then(
+        (cohortId) => getStudentsByCohortId(cohortId),
+        (error) =>
+          console.error("Error getting the user's cohort:", error.message)
+      )
+      .then(setMyCohort)
+  }
+
   useEffect(getAllPosts, [])
-  useEffect(getAllUsers, [])
+  useEffect(getStudentsInMyCohort, [])
   useEffect(getAllCohorts, [])
 
   const { openModal, setModal } = useModal()
+
 
   const showModal = () => {
     setModal(
@@ -56,6 +75,9 @@ const Dashboard = () => {
 
     openModal()
   }
+
+  
+
 
   const shouldRenderList = (list) => Array.isArray(list)
 
