@@ -95,19 +95,10 @@ const UserProfile = () => {
 
           <section>
             <div className="welcome-formheader">
-              <h3>{t("basicInfo")}</h3>
+              <h3>{t("trainingInfo")}</h3>
             </div>
             <Form className="welcome-form">
-              <div className="welcome-form-profileimg">
-                <p className="text-blue1">{t("photo")}</p>
-                <div className="welcome-form-profileimg-input">
-                  <ProfileIcon colour="#28C846" background="#64DC78" />
-                  <p className="text-blue1">{t("addHeadShot")}</p>
-                </div>
-                <p className="welcome-form-profileimg-error">
-                  {t("uploadValidImage")}
-                </p>
-              </div>
+             
               <div className="welcome-form-inputs">
                 <TextInput
                   name="firstName"
