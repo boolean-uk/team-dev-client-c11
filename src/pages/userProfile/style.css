@@ -1,0 +1,11 @@
+.profile-information {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+}
+
+.welcome-formheader {
+  border-top: solid rgba(128, 128, 128, 0.226) 2px;
+  margin-top: 20px;
+  padding-top: 20px;
+}
+
