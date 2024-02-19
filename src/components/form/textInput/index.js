@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const TextInput = ({ value, onChange, name, label, icon, type = "text" , placeholder, required}) => {
+const TextInput = ({ value, onChange, name, label, icon, type = "text" , placeholder, required, disabled}) => {
   const [input, setInput] = useState("");
   const [showpassword, setShowpassword] = useState(false);
   if (type === "password") {
@@ -8,6 +8,7 @@ const TextInput = ({ value, onChange, name, label, icon, type = "text" , placeho
       <div className="inputwrapper">
         <label htmlFor={name}>{label}</label>
         <input
+          disabled={disabled}
           type={type}
           name={name}
           value={value}
@@ -44,6 +45,7 @@ const TextInput = ({ value, onChange, name, label, icon, type = "text" , placeho
       <div className="inputwrapper">
         {label && <label htmlFor={name}>{label}</label>}
         <input
+          disabled={disabled}
           type={type}
           name={name}
           value={value}
