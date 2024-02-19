@@ -68,6 +68,7 @@
   "register": "Register",
   "required": "Required",
   "requiredFields": "Required fields need to be complete",
+  "save" : "Save",
   "searchResults": "Search Results",
   "seeExercises": "See Exercises",
   "sendMessage": "send message",
