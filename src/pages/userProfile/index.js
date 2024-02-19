@@ -5,7 +5,7 @@ import ProfileIcon from "../../assets/icons/profileIcon"
 import Card from "../../components/card"
 import ProfileCircle from "../../components/profileCircle"
 import "./style.css"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Button from "../../components/button"
 
 const user = {
@@ -23,8 +23,22 @@ const initials =
 
 const UserProfile = () => {
   const [disabledText, setDisabledText] = useState(true)
-  const [save, setSave] = useState(false)
+  const [saveButton, setSave] = useState(false)
   const { t } = useTranslation()
+
+  // const revert = () => {
+  //   console.log("revert")
+  //   return
+  // }
+
+  // const save = () => {
+  //   console.log("save")
+  //   return
+  // }
+
+  // useEffect(() => {
+  //   console.log("useEffect")
+  // }, [])
 
   return (
     <main>
@@ -225,8 +239,29 @@ const UserProfile = () => {
         </div>
 
         <div className="profile-buttons">
-          <Button text={t("cancel")} />
-          {save ? <Button text={t("save")}/> : <Button text={t("edit")} />}
+          <Button
+            text={t("cancel")}
+            onClick={() => {
+              setSave(false)
+            }}
+          />
+
+          {saveButton ? (
+            <Button
+              classes="saveButton"
+              text={t("save")}
+              onClick={() => {
+                setSave(false)
+              }}
+            />
+          ) : (
+            <Button
+              text={t("edit")}
+              onClick={() => {
+                setSave(true)
+              }}
+            />
+          )}
         </div>
       </Card>
     </main>
