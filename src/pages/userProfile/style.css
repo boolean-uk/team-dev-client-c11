@@ -13,3 +13,16 @@
   margin-bottom: 20px;
 }
 
+.profile-buttons {
+  display: grid;
+  grid-template-columns: 170px 170px;
+  gap: 20px;
+  justify-content: end;
+}
+
+.profile-buttons > button {
+  background-color:  #F0F5FA;
+  color: #64648C;
+  cursor: pointer;
+}
+
