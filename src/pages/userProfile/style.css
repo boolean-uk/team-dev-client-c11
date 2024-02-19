@@ -26,3 +26,9 @@
   cursor: pointer;
 }
 
+.profile-buttons > .saveButton {
+  background-color:  #000046;
+  color: #ffffff;
+  cursor: pointer;
+}
+
