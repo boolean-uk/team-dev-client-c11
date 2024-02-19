@@ -6,6 +6,7 @@ import Card from "../../components/card"
 import ProfileCircle from "../../components/profileCircle"
 import "./style.css"
 import { useState } from "react"
+import Button from "../../components/button"
 
 const user = {
   firstName: "Lukas",
@@ -22,11 +23,11 @@ const initials =
 
 const UserProfile = () => {
   const [disabledText, setDisabledText] = useState(true)
+  const [save, setSave] = useState(false)
   const { t } = useTranslation()
 
   return (
     <main>
-
       <div className="welcome">
         <h2>{t("profile")}</h2>
       </div>
@@ -100,7 +101,6 @@ const UserProfile = () => {
               <h3>{t("trainingInfo")}</h3>
             </div>
             <Form className="welcome-form">
-             
               <div className="welcome-form-inputs">
                 <TextInput
                   disabled={disabledText}
@@ -144,7 +144,6 @@ const UserProfile = () => {
               <h3>{t("trainingInfo")}</h3>
             </div>
             <Form className="welcome-form">
-             
               <div className="welcome-form-inputs">
                 <TextInput
                   name="firstName"
@@ -187,7 +186,6 @@ const UserProfile = () => {
               <h3>{t("trainingInfo")}</h3>
             </div>
             <Form className="welcome-form">
-             
               <div className="welcome-form-inputs">
                 <TextInput
                   name="firstName"
@@ -224,8 +222,11 @@ const UserProfile = () => {
               </div>
             </Form>
           </section>
+        </div>
 
-
+        <div className="profile-buttons">
+          <Button text={t("cancel")} />
+          {save ? <Button text={t("save")}/> : <Button text={t("edit")} />}
         </div>
       </Card>
     </main>
