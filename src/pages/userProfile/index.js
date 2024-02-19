@@ -5,6 +5,7 @@ import ProfileIcon from "../../assets/icons/profileIcon"
 import Card from "../../components/card"
 import ProfileCircle from "../../components/profileCircle"
 import "./style.css"
+import { useState } from "react"
 
 const user = {
   firstName: "Lukas",
@@ -20,6 +21,7 @@ const initials =
     : "A"
 
 const UserProfile = () => {
+  const [disabledText, setDisabledText] = useState(true)
   const { t } = useTranslation()
 
   return (
@@ -56,6 +58,93 @@ const UserProfile = () => {
                   {t("uploadValidImage")}
                 </p>
               </div>
+              <div className="welcome-form-inputs">
+                <TextInput
+                  name="firstName"
+                  label={`${t("firstName")} *`}
+                  placeholder={
+                    user.firstName
+                      ? user.firstName
+                      : `${t("enterYourFirstName")} *`
+                  }
+                  required
+                />
+                <TextInput
+                  name="lastName"
+                  label={`${t("lastName")} *`}
+                  placeholder={
+                    user.lastName
+                      ? user.lastName
+                      : `${t("enterYourLastName")} *`
+                  }
+                  required
+                />
+                <TextInput
+                  name="githubUsername"
+                  label={`${t("githubUserName")} *`}
+                  placeholder={
+                    user.githubUsername
+                      ? user.githubUsername
+                      : `${t("enterYourGithubUser")} *`
+                  }
+                  required
+                />
+                {/* {message && <p className="input-message">{message}</p>} */}
+                <p className="text-blue1">{`*${t("required")}`}</p>
+              </div>
+            </Form>
+          </section>
+
+          <section>
+            <div className="welcome-formheader">
+              <h3>{t("trainingInfo")}</h3>
+            </div>
+            <Form className="welcome-form">
+             
+              <div className="welcome-form-inputs">
+                <TextInput
+                  disabled={disabledText}
+                  name="firstName"
+                  label={`${t("firstName")} *`}
+                  placeholder={
+                    user.firstName
+                      ? user.firstName
+                      : `${t("enterYourFirstName")} *`
+                  }
+                  required
+                />
+                <TextInput
+                  name="lastName"
+                  label={`${t("lastName")} *`}
+                  placeholder={
+                    user.lastName
+                      ? user.lastName
+                      : `${t("enterYourLastName")} *`
+                  }
+                  required
+                />
+                <TextInput
+                  name="githubUsername"
+                  label={`${t("githubUserName")} *`}
+                  placeholder={
+                    user.githubUsername
+                      ? user.githubUsername
+                      : `${t("enterYourGithubUser")} *`
+                  }
+                  required
+                />
+                {/* {message && <p className="input-message">{message}</p>} */}
+                <p className="text-blue1">{`*${t("required")}`}</p>
+              </div>
+            </Form>
+          </section>
+
+          <section>
+            <div className="welcome-formheader">
+              <h3>{t("trainingInfo")}</h3>
+            </div>
+            <Form className="welcome-form">
+             
               <div className="welcome-form-inputs">
                 <TextInput
                   name="firstName"
