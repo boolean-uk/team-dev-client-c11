@@ -26,19 +26,19 @@ const UserProfile = () => {
   const [saveButton, setSave] = useState(false)
   const { t } = useTranslation()
 
-  // const revert = () => {
-  //   console.log("revert")
-  //   return
-  // }
+  const revert = () => {
+    console.log("revert")
+    return
+  }
 
-  // const save = () => {
-  //   console.log("save")
-  //   return
-  // }
+  const save = () => {
+    console.log("save")
+    return
+  }
 
-  // useEffect(() => {
-  //   console.log("useEffect")
-  // }, [])
+  useEffect(() => {
+    console.log("useEffect")
+  }, [])
 
   return (
     <main>
@@ -75,6 +75,7 @@ const UserProfile = () => {
               </div>
               <div className="welcome-form-inputs">
                 <TextInput
+                  disabled={disabledText}
                   name="firstName"
                   label={`${t("firstName")} *`}
                   placeholder={
@@ -85,6 +86,7 @@ const UserProfile = () => {
                   required
                 />
                 <TextInput
+                  disabled={disabledText}
                   name="lastName"
                   label={`${t("lastName")} *`}
                   placeholder={
@@ -95,6 +97,7 @@ const UserProfile = () => {
                   required
                 />
                 <TextInput
+                  disabled={disabledText}
                   name="githubUsername"
                   label={`${t("githubUserName")} *`}
                   placeholder={
@@ -105,7 +108,6 @@ const UserProfile = () => {
                   required
                 />
                 {/* {message && <p className="input-message">{message}</p>} */}
-                <p className="text-blue1">{`*${t("required")}`}</p>
               </div>
             </Form>
           </section>
@@ -128,6 +130,7 @@ const UserProfile = () => {
                   required
                 />
                 <TextInput
+                  disabled={disabledText}
                   name="lastName"
                   label={`${t("lastName")} *`}
                   placeholder={
@@ -138,6 +141,7 @@ const UserProfile = () => {
                   required
                 />
                 <TextInput
+                  disabled={disabledText}
                   name="githubUsername"
                   label={`${t("githubUserName")} *`}
                   placeholder={
@@ -148,7 +152,6 @@ const UserProfile = () => {
                   required
                 />
                 {/* {message && <p className="input-message">{message}</p>} */}
-                <p className="text-blue1">{`*${t("required")}`}</p>
               </div>
             </Form>
           </section>
@@ -160,6 +163,7 @@ const UserProfile = () => {
             <Form className="welcome-form">
               <div className="welcome-form-inputs">
                 <TextInput
+                  disabled={disabledText}
                   name="firstName"
                   label={`${t("firstName")} *`}
                   placeholder={
@@ -170,6 +174,7 @@ const UserProfile = () => {
                   required
                 />
                 <TextInput
+                  disabled={disabledText}
                   name="lastName"
                   label={`${t("lastName")} *`}
                   placeholder={
@@ -180,6 +185,7 @@ const UserProfile = () => {
                   required
                 />
                 <TextInput
+                  disabled={disabledText}
                   name="githubUsername"
                   label={`${t("githubUserName")} *`}
                   placeholder={
@@ -190,7 +196,6 @@ const UserProfile = () => {
                   required
                 />
                 {/* {message && <p className="input-message">{message}</p>} */}
-                <p className="text-blue1">{`*${t("required")}`}</p>
               </div>
             </Form>
           </section>
@@ -202,6 +207,7 @@ const UserProfile = () => {
             <Form className="welcome-form">
               <div className="welcome-form-inputs">
                 <TextInput
+                  disabled={disabledText}
                   name="firstName"
                   label={`${t("firstName")} *`}
                   placeholder={
@@ -212,6 +218,7 @@ const UserProfile = () => {
                   required
                 />
                 <TextInput
+                  disabled={disabledText}
                   name="lastName"
                   label={`${t("lastName")} *`}
                   placeholder={
@@ -222,6 +229,7 @@ const UserProfile = () => {
                   required
                 />
                 <TextInput
+                  disabled={disabledText}
                   name="githubUsername"
                   label={`${t("githubUserName")} *`}
                   placeholder={
@@ -229,20 +237,22 @@ const UserProfile = () => {
                       ? user.githubUsername
                       : `${t("enterYourGithubUser")} *`
                   }
-                  required
                 />
                 {/* {message && <p className="input-message">{message}</p>} */}
-                <p className="text-blue1">{`*${t("required")}`}</p>
               </div>
             </Form>
           </section>
         </div>
+
+        <p className="text-blue1">{`*${t("required")}`}</p>
 
         <div className="profile-buttons">
           <Button
             text={t("cancel")}
             onClick={() => {
               setSave(false)
+              setDisabledText(true)
+              revert()
             }}
           />
 
@@ -252,6 +262,8 @@ const UserProfile = () => {
               text={t("save")}
               onClick={() => {
                 setSave(false)
+                setDisabledText(true)
+                save()
               }}
             />
           ) : (
@@ -259,6 +271,7 @@ const UserProfile = () => {
               text={t("edit")}
               onClick={() => {
                 setSave(true)
+                setDisabledText(false)
               }}
             />
           )}
