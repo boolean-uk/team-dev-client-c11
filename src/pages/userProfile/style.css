@@ -32,3 +32,6 @@
   cursor: pointer;
 }
 
+.locked-input form input {
+  background: white;
+}

@@ -36,6 +36,9 @@ const UserProfile = () => {
     ? `${user.firstName.charAt(0)}${user.lastName.charAt(0)}`
     : "A"
 
+  let classes = ""
+  if(saveButton === false){classes = "locked-input"}
+
   const onInput = (event) => {
     const { name, value } = event.target
 
@@ -79,7 +82,7 @@ const UserProfile = () => {
         </div>
 
         <div className="profile-container">
-          <section>
+          <section className={`${classes}`}>
             <BasicInfo
               onInput={onInput}
               disabledText={disabledText}
