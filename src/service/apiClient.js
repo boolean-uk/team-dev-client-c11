@@ -45,12 +45,22 @@ async function postComment(comment) {
 
 async function getCohorts() {
   const res = await get("cohorts")
-  return res.data
+  return res.data 
 }
 
 async function getTeachers() {
   const res = await get("teachers")
   return res.data.teachers
+}
+
+async function getSelfTeacher() {
+  const res = await get("teachers/me")
+  return res.data
+}
+
+async function getSelfStudent() {
+  const res = await get("students/me")
+  return res.data
 }
 
 async function getStudentsByCohortId(cohort_id) {
@@ -149,5 +159,7 @@ export {
   getTeachers,
   getStudentsByCohortId,
   getUserById,
-  getStudents
+  getStudents,
+  getSelfTeacher,
+  getSelfStudent
 }
