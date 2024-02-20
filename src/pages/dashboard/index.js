@@ -10,12 +10,14 @@ import {
   getPosts,
   getTeachers,
   getUsers,
+  getStudents
 } from "../../service/apiClient"
 import UsersList from "../../components/usersList"
 import SearchUserAside from "../../components/searchUserAside"
 import CohortList from "../../components/cohortList"
 import { useTranslation } from "react-i18next"
 import TeacherList from "../../components/teacherList"
+import StudentsList from "../../components/studentsList"
 
 const Dashboard = () => {
   const { t } = useTranslation()
@@ -24,6 +26,7 @@ const Dashboard = () => {
   const [myCohort, setMyCohort] = useState([])
   const [cohorts, setCohorts] = useState(null)
   const [teachers, setTeachers] = useState([])
+  const [students, setStudents] = useState([])
 
   const sortPosts = (fetchedPosts) => {
     const sortedPosts = fetchedPosts.sort(
@@ -53,12 +56,17 @@ const Dashboard = () => {
     getTeachers().then(setTeachers)
   }, [])
 
+  const getAllStudents = useCallback(() => {
+    getStudents().then(setStudents)
+  }, [])
+
   useEffect(() => {
     getAllPosts()
     getAllUsers()
     getAllCohorts()
     getAllTeachers()
-  }, [getAllPosts, getAllUsers, getAllCohorts, getAllTeachers])
+    getAllStudents()
+  }, [getAllPosts, getAllUsers, getAllCohorts, getAllTeachers, getAllStudents])
 
   const { openModal, setModal } = useModal()
 
@@ -76,9 +84,14 @@ const Dashboard = () => {
   const showAllCohortsOrMine = () => {
     if (shouldRenderList(cohorts)) {
       return (
+      <>
         <Card header={t("Cohorts")}>
           <CohortList cohorts={cohorts} />
         </Card>
+        <Card header={t("Students")}>
+         <StudentsList students={students}/>
+       </Card>
+      </>
       )
     }
     return (
