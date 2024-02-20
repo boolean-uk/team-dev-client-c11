@@ -1,12 +1,15 @@
 import { useTranslation } from "react-i18next"
-import Form from "../../components/form"
-import TextInput from "../../components/form/textInput"
-import ProfileIcon from "../../assets/icons/profileIcon"
 import Card from "../../components/card"
 import ProfileCircle from "../../components/profileCircle"
 import "./style.css"
 import { useEffect, useState } from "react"
 import Button from "../../components/button"
+import BasicInfo from "../../components/basic-info"
+import ContactInfo from "../../components/contactInfo"
+import TrainingInfo from "../../components/trainingInfo"
+import Bio from "../../components/bio"
+import ProfessionalInfo from "../../components/professionalinfo"
+
 
 const user = {
   firstName: "Lukas",
@@ -24,7 +27,13 @@ const initials =
 const UserProfile = () => {
   const [disabledText, setDisabledText] = useState(true)
   const [saveButton, setSave] = useState(false)
+  const [isTeacher, setisTeacher] = useState(false)
+
   const { t } = useTranslation()
+
+  const userGet = () => {
+    
+  }
 
   const revert = () => {
     console.log("revert")
@@ -59,188 +68,25 @@ const UserProfile = () => {
 
         <div className="profile-container">
           <section>
-            <div className="welcome-formheader">
-              <h3>{t("basicInfo")}</h3>
-            </div>
-            <Form className="welcome-form">
-              <div className="welcome-form-profileimg">
-                <p className="text-blue1">{t("photo")}</p>
-                <div className="welcome-form-profileimg-input">
-                  <ProfileIcon colour="#28C846" background="#64DC78" />
-                  <p className="text-blue1">{t("addHeadShot")}</p>
-                </div>
-                <p className="welcome-form-profileimg-error">
-                  {t("uploadValidImage")}
-                </p>
-              </div>
-              <div className="welcome-form-inputs">
-                <TextInput
-                  disabled={disabledText}
-                  name="firstName"
-                  label={`${t("firstName")} *`}
-                  placeholder={
-                    user.firstName
-                      ? user.firstName
-                      : `${t("enterYourFirstName")} *`
-                  }
-                  required
-                />
-                <TextInput
-                  disabled={disabledText}
-                  name="lastName"
-                  label={`${t("lastName")} *`}
-                  placeholder={
-                    user.lastName
-                      ? user.lastName
-                      : `${t("enterYourLastName")} *`
-                  }
-                  required
-                />
-                <TextInput
-                  disabled={disabledText}
-                  name="githubUsername"
-                  label={`${t("githubUserName")} *`}
-                  placeholder={
-                    user.githubUsername
-                      ? user.githubUsername
-                      : `${t("enterYourGithubUser")} *`
-                  }
-                  required
-                />
-                {/* {message && <p className="input-message">{message}</p>} */}
-              </div>
-            </Form>
+            <BasicInfo disabledText={disabledText} data={user} />
+          </section>
+
+          {isTeacher ? (
+            <section>
+              <ProfessionalInfo disabledText={disabledText} data={user} />
+            </section>
+          ) : (
+            <section>
+              <TrainingInfo disabledText={disabledText} data={user} />
+            </section>
+          )}
+
+          <section>
+            <ContactInfo disabledText={disabledText} data={user} />
           </section>
 
           <section>
-            <div className="welcome-formheader">
-              <h3>{t("trainingInfo")}</h3>
-            </div>
-            <Form className="welcome-form">
-              <div className="welcome-form-inputs">
-                <TextInput
-                  disabled={disabledText}
-                  name="firstName"
-                  label={`${t("firstName")} *`}
-                  placeholder={
-                    user.firstName
-                      ? user.firstName
-                      : `${t("enterYourFirstName")} *`
-                  }
-                  required
-                />
-                <TextInput
-                  disabled={disabledText}
-                  name="lastName"
-                  label={`${t("lastName")} *`}
-                  placeholder={
-                    user.lastName
-                      ? user.lastName
-                      : `${t("enterYourLastName")} *`
-                  }
-                  required
-                />
-                <TextInput
-                  disabled={disabledText}
-                  name="githubUsername"
-                  label={`${t("githubUserName")} *`}
-                  placeholder={
-                    user.githubUsername
-                      ? user.githubUsername
-                      : `${t("enterYourGithubUser")} *`
-                  }
-                  required
-                />
-                {/* {message && <p className="input-message">{message}</p>} */}
-              </div>
-            </Form>
-          </section>
-
-          <section>
-            <div className="welcome-formheader">
-              <h3>{t("trainingInfo")}</h3>
-            </div>
-            <Form className="welcome-form">
-              <div className="welcome-form-inputs">
-                <TextInput
-                  disabled={disabledText}
-                  name="firstName"
-                  label={`${t("firstName")} *`}
-                  placeholder={
-                    user.firstName
-                      ? user.firstName
-                      : `${t("enterYourFirstName")} *`
-                  }
-                  required
-                />
-                <TextInput
-                  disabled={disabledText}
-                  name="lastName"
-                  label={`${t("lastName")} *`}
-                  placeholder={
-                    user.lastName
-                      ? user.lastName
-                      : `${t("enterYourLastName")} *`
-                  }
-                  required
-                />
-                <TextInput
-                  disabled={disabledText}
-                  name="githubUsername"
-                  label={`${t("githubUserName")} *`}
-                  placeholder={
-                    user.githubUsername
-                      ? user.githubUsername
-                      : `${t("enterYourGithubUser")} *`
-                  }
-                  required
-                />
-                {/* {message && <p className="input-message">{message}</p>} */}
-              </div>
-            </Form>
-          </section>
-
-          <section>
-            <div className="welcome-formheader">
-              <h3>{t("trainingInfo")}</h3>
-            </div>
-            <Form className="welcome-form">
-              <div className="welcome-form-inputs">
-                <TextInput
-                  disabled={disabledText}
-                  name="firstName"
-                  label={`${t("firstName")} *`}
-                  placeholder={
-                    user.firstName
-                      ? user.firstName
-                      : `${t("enterYourFirstName")} *`
-                  }
-                  required
-                />
-                <TextInput
-                  disabled={disabledText}
-                  name="lastName"
-                  label={`${t("lastName")} *`}
-                  placeholder={
-                    user.lastName
-                      ? user.lastName
-                      : `${t("enterYourLastName")} *`
-                  }
-                  required
-                />
-                <TextInput
-                  disabled={disabledText}
-                  name="githubUsername"
-                  label={`${t("githubUserName")} *`}
-                  placeholder={
-                    user.githubUsername
-                      ? user.githubUsername
-                      : `${t("enterYourGithubUser")} *`
-                  }
-                />
-                {/* {message && <p className="input-message">{message}</p>} */}
-              </div>
-            </Form>
+            <Bio disabledText={disabledText} data={user} />
           </section>
         </div>
 
