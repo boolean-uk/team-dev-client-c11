@@ -30,6 +30,7 @@ const UserProfile = () => {
     endDate: "121212",
     imageUrl: "image@image.com",
   })
+  const [tempUser, setTempUser] = useState(user)
 
   const initials =
   user && user.firstName && user.lastName
@@ -53,7 +54,9 @@ const UserProfile = () => {
 
   const { t } = useTranslation()
 
+  
   const revert = () => {
+    setUser(tempUser)
     console.log("revert")
     return
   }
