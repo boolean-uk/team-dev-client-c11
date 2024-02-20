@@ -11,29 +11,41 @@ import Bio from "../../components/bio"
 import ProfessionalInfo from "../../components/professionalinfo"
 
 
-const user = {
-  firstName: "Lukas",
-  lastName: "Dembicki",
-  title: "Software Developer",
-  bio: "Hello I am a coder",
-  githubUsername: "PeachyOmnivore",
-}
-
-const initials =
-  user && user.firstName && user.lastName
-    ? `${user.firstName.charAt(0)}${user.lastName.charAt(0)}`
-    : "A"
-
 const UserProfile = () => {
   const [disabledText, setDisabledText] = useState(true)
   const [saveButton, setSave] = useState(false)
   const [isTeacher, setisTeacher] = useState(false)
+  const [user, setUser] = useState({
+    firstName: "",
+    lastName: "",
+    githubUsername: "",
+    bio: "",
+    email: "",
+    mobile: "",
+    password: "",
+    role: "",
+    specialism: "",
+    cohort: "",
+    startDate: "",
+    endDate: "",
+    imageUrl: "",
+  })
+
+  const initials =
+  user && user.firstName && user.lastName
+    ? `${user.firstName.charAt(0)}${user.lastName.charAt(0)}`
+    : "A"
+
+  const onInput = (event) => {
+    const { name, value } = event.target
+
+    setUser({
+      ...user,
+      [name]: value,
+    })
+  }
 
   const { t } = useTranslation()
-
-  const userGet = () => {
-    
-  }
 
   const revert = () => {
     console.log("revert")
@@ -68,25 +80,41 @@ const UserProfile = () => {
 
         <div className="profile-container">
           <section>
-            <BasicInfo disabledText={disabledText} data={user} />
+            <BasicInfo
+              onInput={onInput}
+              disabledText={disabledText}
+              data={user}
+            />
           </section>
 
           {isTeacher ? (
             <section>
-              <ProfessionalInfo disabledText={disabledText} data={user} />
+              <ProfessionalInfo
+                onInput={onInput}
+                disabledText={disabledText}
+                data={user}
+              />
             </section>
           ) : (
             <section>
-              <TrainingInfo disabledText={disabledText} data={user} />
+              <TrainingInfo
+                onInput={onInput}
+                disabledText={disabledText}
+                data={user}
+              />
             </section>
           )}
 
           <section>
-            <ContactInfo disabledText={disabledText} data={user} />
+            <ContactInfo
+              onInput={onInput}
+              disabledText={disabledText}
+              data={user}
+            />
           </section>
 
           <section>
-            <Bio disabledText={disabledText} data={user} />
+            <Bio onInput={onInput} disabledText={disabledText} data={user} />
           </section>
         </div>
 
