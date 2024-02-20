@@ -63,6 +63,11 @@ async function getSelfStudent() {
   return res.data
 }
 
+async function getStudentsByCohortId(cohort_id) {
+  const res = await get(`cohorts/${cohort_id}/students`)
+  return res.students
+}
+
 async function post(endpoint, data, auth = true) {
   return await request("POST", endpoint, data, auth)
 }
@@ -143,6 +148,7 @@ export {
   getSelf,
   getCohorts,
   getTeachers,
+  getStudentsByCohortId,
   getSelfTeacher,
   getSelfStudent
 }

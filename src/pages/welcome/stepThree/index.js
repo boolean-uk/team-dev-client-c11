@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react"
-import Form from "../../../components/form"
-import TextInput from "../../../components/form/textInput"
+import TrainingInfo from "../../../components/trainingInfo"
 
-const StepThree = ({ data, setData, message, setCanProgress, setMessage }) => {
+const StepThree = ({
+  data,
+  setData,
+  message,
+  setCanProgress,
+  setMessage
+}) => {
   const [isRoleValid, setIsRoleValid] = useState(false)
   const [isSpecialismValid, setIsSpecialismValid] = useState(false)
   const [isCohortValid, setIsCohortValid] = useState(false)
@@ -68,47 +73,11 @@ const StepThree = ({ data, setData, message, setCanProgress, setMessage }) => {
   ])
 
   return (
-    <>
-      <div className="welcome-formheader">
-        <h3>Training Info</h3>
-      </div>
-      <Form className="welcome-form">
-        <div className="welcome-form-inputs">
-          <TextInput
-            onChange={onInput}
-            value={data.role}
-            name="role"
-            label={"Role*"}
-          />
-          <TextInput
-            onChange={onInput}
-            value={data.specialism}
-            name="specialism"
-            label={"Specialism*"}
-          />
-          <TextInput
-            onChange={onInput}
-            value={data.cohort}
-            name="cohort"
-            label={"Cohort*"}
-          />
-          <TextInput
-            onChange={onInput}
-            value={data.startDate}
-            name="startDate"
-            label={"Start date*"}
-          />
-          <TextInput
-            onChange={onInput}
-            value={data.endDate}
-            name="endDate"
-            label={"End date*"}
-          />
-          {message && <p className="input-message">{message}</p>}
-          <p className="text-blue1">*Required</p>
-        </div>
-      </Form>
-    </>
+    <TrainingInfo
+      data={data}
+      onInput={onInput}
+      message={message}
+    />
   )
 }
 

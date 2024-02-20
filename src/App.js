@@ -40,11 +40,11 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
-             <Route
+            <Route
               path="cohorts"
               element={
                 <ProtectedRoute>
-                  <Cohorts/>
+                  <Cohorts />
                 </ProtectedRoute>
               }
             />

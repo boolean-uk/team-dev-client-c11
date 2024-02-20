@@ -6,7 +6,7 @@ import translationEN from "./locales/en/translation.json"
 import translationSV from "./locales/sv/translation.json"
 import translationCY from "./locales/cy/translation.json"
 
-const {REACT_APP_DEFAULT_LANGUAGE} = process.env
+const { REACT_APP_DEFAULT_LANGUAGE } = process.env
 
 const resources = {
   en: {
