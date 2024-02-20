@@ -4,7 +4,13 @@ import Header from "../components/header"
 import Modal from "../components/modal"
 import Navigation from "../components/navigation"
 import useAuth from "../hooks/useAuth"
-import { createProfile, login, register } from "../service/apiClient"
+import {
+  createProfile,
+  getSelfStudent,
+  getSelfTeacher,
+  login,
+  register,
+} from "../service/apiClient"
 import jwtDecode from "jwt-decode"
 
 const AuthContext = createContext()
@@ -15,6 +21,9 @@ const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null)
   const [logout, setLogout] = useState(false)
   const [userId, setUserId] = useState(null)
+  const [userRole, setUserRole] = useState(null)
+  const [loggedInStudent, setLoggedInStudent] = useState(null)
+  const [loggedInTeacher, setLoggedInTeacher] = useState(null)
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token")
@@ -51,6 +60,26 @@ const AuthProvider = ({ children }) => {
     if (storedToken && !userId) {
       setUserId(jwtDecode(storedToken).userId)
     }
+
+    if (storedToken && !userRole) {
+      setUserRole(jwtDecode(storedToken).userRole)
+    }
+
+    const getAndSetStudentOrTeacher = (userRole) => {
+      if (userRole === "STUDENT") {
+        getSelfStudent().then(setLoggedInStudent)
+        return
+      }
+      if (userRole === "TEACHER") {
+        getSelfTeacher().then(setLoggedInTeacher)
+        return
+      }
+      throw Error("No role assigned to this user")
+    }
+
+    if (userRole) {
+      getAndSetStudentOrTeacher(userRole)
+    }
   }, [
     location.state?.from?.pathname,
     navigate,
@@ -58,6 +87,7 @@ const AuthProvider = ({ children }) => {
     location,
     token,
     userId,
+    userRole,
   ])
 
   const handleLogin = async (email, password) => {
@@ -79,9 +109,11 @@ const AuthProvider = ({ children }) => {
   }
 
   const checkPassword = (password) => {
-    const hasUppercase = /[A-Z]/.test(password);
-    const hasNumber = /\d/.test(password);
-    const hasSpecialChar = /[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/.test(password);
+    const hasUppercase = /[A-Z]/.test(password)
+    const hasNumber = /\d/.test(password)
+    const hasSpecialChar = /[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/.test(
+      password
+    )
 
     return password.length >= 8 && hasUppercase && hasNumber && hasSpecialChar
   }
@@ -89,9 +121,9 @@ const AuthProvider = ({ children }) => {
   const handleRegister = async (email, password) => {
     if (checkPassword(password)) {
       const res = await register(email, password)
-      
+
       setToken(res.data.token)
-      
+
       navigate("/verification")
     } else {
       return false
@@ -135,6 +167,9 @@ const AuthProvider = ({ children }) => {
   const value = {
     token,
     userId,
+    loggedInStudent,
+    loggedInTeacher,
+    userRole,
     onLogin: handleLogin,
     onLogout: handleLogout,
     onRegister: handleRegister,
