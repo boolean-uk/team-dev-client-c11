@@ -81,7 +81,7 @@ async function getUsers() {
 }
 
 async function getUserById(userId) {
-    return get(`users/:${userId}`)
+    return get(`users/${userId}`)
   }
 
 async function put(endpoint, data, auth = true) {
