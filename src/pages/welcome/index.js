@@ -93,10 +93,7 @@ const Welcome = () => {
           setData={onChange}
           setCanProgress={setCanProgress}
         />
-        <StepFour
-          data={profile}
-          setData={onChange}
-        />
+        <StepFour data={profile} setData={onChange} />
       </Stepper>
     </main>
   )
