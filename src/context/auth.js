@@ -66,11 +66,11 @@ const AuthProvider = ({ children }) => {
     }
 
     const getAndSetStudentOrTeacher = (userRole) => {
-      if (userRole === "STUDENT") {
+      if (userRole.toUpperCase() === "STUDENT") {
         getSelfStudent().then(setLoggedInStudent)
         return
       }
-      if (userRole === "TEACHER") {
+      if (userRole.toUpperCase() === "TEACHER") {
         getSelfTeacher().then(setLoggedInTeacher)
         return
       }
