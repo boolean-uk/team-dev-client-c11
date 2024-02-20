@@ -28,6 +28,7 @@ const Welcome = () => {
     cohort: "",
     startDate: "",
     endDate: "",
+    imageUrl: "",
   })
 
   const onChange = (event) => {
@@ -38,8 +39,6 @@ const Welcome = () => {
       [name]: value,
     })
   }
-
-
 
   const onComplete = () => {
     onCreateProfile(

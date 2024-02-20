@@ -1,15 +1,23 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import Button from "../../components/button"
 import Card from "../../components/card"
 import CreatePostModal from "../../components/createPostModal"
 import Posts from "../../components/posts"
 import useModal from "../../hooks/useModal"
 import "./style.css"
-import { getCohorts, getPosts, getSelf, getStudentsByCohortId } from "../../service/apiClient"
+import {
+  getCohorts,
+  getPosts,
+  getTeachers,
+  getSelf, getStudentsByCohortId,
+  getStudents
+} from "../../service/apiClient"
 import UsersList from "../../components/usersList"
 import SearchUserAside from "../../components/searchUserAside"
 import CohortList from "../../components/cohortList"
 import { useTranslation } from "react-i18next"
+import TeacherList from "../../components/teacherList"
+import StudentsList from "../../components/studentsList"
 
 const Dashboard = () => {
   const { t } = useTranslation()
@@ -17,6 +25,8 @@ const Dashboard = () => {
   const [posts, setPosts] = useState([])
   const [myCohort, setMyCohort] = useState([])
   const [cohorts, setCohorts] = useState(null)
+  const [teachers, setTeachers] = useState([])
+  const [students, setStudents] = useState([])
 
   const sortPosts = (fetchedPosts) => {
     const sortedPosts = fetchedPosts.sort(
@@ -25,20 +35,20 @@ const Dashboard = () => {
     return sortedPosts
   }
 
-  const getAllPosts = () => {
+  const getAllPosts = useCallback(() => {
     getPosts()
       .then(sortPosts)
       .then(setPosts)
       .catch((error) => {
         console.error("Error get all posts sorted:", error.message)
       })
-  }
+  }, [])
 
-  // const getAllUsers = () => {
-  //   getUsers().then(setMyCohort)
-  // }
+  const getAllUsers = useCallback(() => {
+    getUsers().then(setMyCohort)
+  }, [])
 
-  const getAllCohorts = () => {
+  const getAllCohorts = useCallback(() => {
     getCohorts().then(setCohorts)
   }
 
@@ -63,6 +73,23 @@ const Dashboard = () => {
   useEffect(getAllPosts, [])
   useEffect(getStudentsInMyCohort, [])
   useEffect(getAllCohorts, [])
+  }, [])
+
+  const getAllTeachers = useCallback(() => {
+    getTeachers().then(setTeachers)
+  }, [])
+
+  const getAllStudents = useCallback(() => {
+    getStudents().then(setStudents)
+  }, [])
+
+  useEffect(() => {
+    getAllPosts()
+    getAllUsers()
+    getAllCohorts()
+    getAllTeachers()
+    getAllStudents()
+  }, [getAllPosts, getAllUsers, getAllCohorts, getAllTeachers, getAllStudents])
 
   const { openModal, setModal } = useModal()
 
@@ -84,9 +111,14 @@ const Dashboard = () => {
   const showAllCohortsOrMine = () => {
     if (shouldRenderList(cohorts)) {
       return (
+      <>
         <Card header={t("Cohorts")}>
           <CohortList cohorts={cohorts} />
         </Card>
+        <Card header={t("Students")}>
+         <StudentsList students={students}/>
+       </Card>
+      </>
       )
     }
     return (
@@ -113,6 +145,9 @@ const Dashboard = () => {
       <aside>
         <SearchUserAside />
         {showAllCohortsOrMine()}
+        <Card header={t("Teachers")}>
+          <TeacherList teachers={teachers} />
+        </Card>
       </aside>
     </>
   )
