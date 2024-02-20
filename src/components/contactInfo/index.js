@@ -2,7 +2,7 @@ import Form from "../form"
 import TextInput from "../form/textInput"
 import { useTranslation } from "react-i18next"
 
-const ContactInfo = ({ data, onInput, disabledText, message, classes }) => {
+const ContactInfo = ({ data, onInput, disabledText, message }) => {
   const { t } = useTranslation()
 
   return (

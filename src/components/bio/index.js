@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next"
 import Form from "../form"
 
-const Bio = ({ data, disabledText, splitWord, onInput, classes }) => {
+const Bio = ({ data, disabledText, splitWord, onInput }) => {
   const { t } = useTranslation()
   return (
     <>

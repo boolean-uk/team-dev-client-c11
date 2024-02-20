@@ -1,6 +1,6 @@
 import Bio from "../../../components/bio"
 
-const StepFour = ({ data, setData, disabledText, classes }) => {
+const StepFour = ({ data, setData }) => {
   const onInput = (e) => {
     setData(e)
   }
@@ -12,8 +12,6 @@ const StepFour = ({ data, setData, disabledText, classes }) => {
       data={data}
       onInput={onInput}
       splitWord={splitWord}
-      disabledText={disabledText}
-      classes={classes}
     />
   )
 }

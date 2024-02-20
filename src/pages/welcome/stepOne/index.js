@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import BasicInfo from "../../../components/basic-info"
 
-const StepOne = ({ data, setData, setCanProgress, message, setMessage, disabledText, classes }) => {
+const StepOne = ({ data, setData, setCanProgress, message, setMessage }) => {
   const { t } = useTranslation()
   const [firstNameValid, setFirstNameValid] = useState(false)
   const [lastNameValid, setLastNameValid] = useState(false)
@@ -45,8 +45,6 @@ const StepOne = ({ data, setData, setCanProgress, message, setMessage, disabledT
       data={data}
       onInput={onInput}
       message={message}
-      disabledText={disabledText}
-      classes={classes}
     />
   )
 }

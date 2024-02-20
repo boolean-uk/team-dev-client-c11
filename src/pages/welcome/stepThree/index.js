@@ -6,9 +6,7 @@ const StepThree = ({
   setData,
   message,
   setCanProgress,
-  setMessage,
-  disabledText,
-  classes,
+  setMessage
 }) => {
   const [isRoleValid, setIsRoleValid] = useState(false)
   const [isSpecialismValid, setIsSpecialismValid] = useState(false)
@@ -79,8 +77,6 @@ const StepThree = ({
       data={data}
       onInput={onInput}
       message={message}
-      disabledText={disabledText}
-      classes={classes}
     />
   )
 }

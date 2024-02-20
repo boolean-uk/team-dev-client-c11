@@ -6,8 +6,7 @@ const ProfessionalInfo = ({
   data,
   setData,
   disabledText,
-  message,
-  classes,
+  message
 }) => {
   const { t } = useTranslation()
   const onInput = (e) => {

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import ContactInfo from "../../../components/contactInfo"
 
-const StepTwo = ({ data, setData, setCanProgress, message, setMessage, disabledText, classes }) => {
+const StepTwo = ({ data, setData, setCanProgress, message, setMessage }) => {
   const { t } = useTranslation()
 
   const [isEmailValid, setIsEmailValid] = useState(false)
@@ -37,9 +37,7 @@ const StepTwo = ({ data, setData, setCanProgress, message, setMessage, disabledT
     <ContactInfo
       data={data}
       onInput={onInput}
-      disabledText={disabledText}
       message={message}
-      classes={classes}
     />
   )
 }
