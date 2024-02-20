@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react"
-import Form from "../../../components/form"
-import TextInput from "../../../components/form/textInput"
 import { useTranslation } from "react-i18next"
+import BasicInfo from "../../../components/basic-info"
 
-const StepOne = ({ data, setData, setCanProgress, message, setMessage }) => {
+const StepOne = ({ data, setData, setCanProgress, message, setMessage, disabledText, classes }) => {
   const { t } = useTranslation()
   const [firstNameValid, setFirstNameValid] = useState(false)
   const [lastNameValid, setLastNameValid] = useState(false)
@@ -42,48 +41,13 @@ const StepOne = ({ data, setData, setCanProgress, message, setMessage }) => {
   }, [firstNameValid, setCanProgress, lastNameValid, userNameValid])
 
   return (
-    <>
-      <div className="welcome-formheader">
-        <h3>{t("basicInfo")}</h3>
-      </div>
-      <Form className="welcome-form">
-        <div className="welcome-form-inputs">
-          <TextInput
-            onChange={onInput}
-            value={data.imageUrl}
-            name="imageUrl"
-            label={`${t("profileImageUrl")}`}
-            placeholder={`${t("enterProfileImageUrl")}`}
-          />
-          <TextInput
-            onChange={onInput}
-            value={data.firstName}
-            name="firstName"
-            label={`${t("firstName")} *`}
-            placeholder={`${t("enterYourFirstName")}`}
-            required
-          />
-          <TextInput
-            onChange={onInput}
-            value={data.lastName}
-            name="lastName"
-            label={`${t("lastName")} *`}
-            placeholder={`${t("enterYourLastName")}`}
-            required
-          />
-          <TextInput
-            onChange={onInput}
-            value={data.githubUsername}
-            name="githubUsername"
-            label={`${t("githubUserName")} *`}
-            placeholder={`${t("enterYourGithubUser")} *`}
-            required
-          />
-          {message && <p className="input-message">{message}</p>}
-          <p className="text-blue1">{`*${t("required")}`}</p>
-        </div>
-      </Form>
-    </>
+    <BasicInfo
+      data={data}
+      onInput={onInput}
+      message={message}
+      disabledText={disabledText}
+      classes={classes}
+    />
   )
 }
 

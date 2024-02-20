@@ -1,8 +1,8 @@
 import CohortCard from "../cohortCard"
 
 const CohortList = ({ cohorts }) => {
-  return cohorts.map((item, index) => (
-    <CohortCard key={`cohortListItem${index}`} cohort={item.cohort.id} />
+  return cohorts.map((cohort, index) => (
+    <CohortCard key={`cohortListItem${index}`} cohort={cohort} />
   ))
 }
 

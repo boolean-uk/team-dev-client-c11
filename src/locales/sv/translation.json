@@ -86,5 +86,7 @@
   "welcome": "Välkommen till Cohort Manager",
   "whatsOnYourMind": "Vad tänker du på?",
   "profileImageUrl": "Profilbilds-URL",
-  "enterProfileImageUrl": "Ange din profilbilds-URL"
+  "enterProfileImageUrl": "Ange din profilbilds-URL",
+  "passwordOk": "Lösenordet är OK",
+  "invalidPassword": "Lösenordet måste innehålla åtminstone en stor bokstav, en siffra och ett specialtecken."
 }

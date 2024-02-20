@@ -1,18 +1,19 @@
 import i18n from "i18next"
 import { initReactI18next } from "react-i18next"
+import LanguageDetector from "i18next-browser-languagedetector"
 
 import translationEN from "./locales/en/translation.json"
-import translationSE from "./locales/se/translation.json"
+import translationSV from "./locales/sv/translation.json"
 import translationCY from "./locales/cy/translation.json"
 
-const {REACT_APP_DEFAULT_LANGUAGE} = process.env
+const { REACT_APP_DEFAULT_LANGUAGE } = process.env
 
 const resources = {
   en: {
     translation: translationEN,
   },
-  se: {
-    translation: translationSE,
+  sv: {
+    translation: translationSV,
   },
   cy: {
     translation: translationCY,
@@ -22,10 +23,11 @@ const resources = {
 i18n.availableLanguages = Object.keys(resources)
 
 i18n
-  .use(initReactI18next) // passes i18n down to react-i18next
+  .use(initReactI18next)
+  .use(LanguageDetector)
   .init({
     resources,
-    fallbackLng: REACT_APP_DEFAULT_LANGUAGE,
+    fallbackLng: REACT_APP_DEFAULT_LANGUAGE || "en",
   })
 
 export default i18n

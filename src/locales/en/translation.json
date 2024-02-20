@@ -86,5 +86,7 @@
   "welcome": "Welcome to Cohort Manager",
   "whatsOnYourMind": "What's on your mind?",
   "profileImageUrl": "Profile image URL",
-  "enterProfileImageUrl": "Enter your profile image URL"
+  "enterProfileImageUrl": "Enter your profile image URL",
+  "passwordOk": "Password is ok",
+  "invalidPassword": "Password must contain at least one capital letter, one number and one special character"
 }

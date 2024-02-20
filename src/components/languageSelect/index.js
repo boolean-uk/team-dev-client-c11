@@ -5,15 +5,19 @@ import Menu from "../menu"
 
 import "./style.css"
 
-const {REACT_APP_DEFAULT_LANGUAGE} = process.env
-
 const LanguageSelect = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState(REACT_APP_DEFAULT_LANGUAGE)
+  const [selectedLanguage, setSelectedLanguage] = useState(i18n.language)
   const [isMenuVisible, setIsMenuVisible] = useState(false)
 
+  const fallbackLng = i18n.options.fallbackLng[0]
+
   useEffect(() => {
-    i18n.changeLanguage(selectedLanguage)
-  }, [selectedLanguage])
+    if (i18n.availableLanguages.includes(selectedLanguage)) {
+      i18n.changeLanguage(selectedLanguage)
+    } else {
+      i18n.changeLanguage(fallbackLng)
+    }
+  }, [selectedLanguage, fallbackLng])
 
   return (
     <div

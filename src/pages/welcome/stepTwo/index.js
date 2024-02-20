@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react"
-import Form from "../../../components/form"
-import TextInput from "../../../components/form/textInput"
 import { useTranslation } from "react-i18next"
+import ContactInfo from "../../../components/contactInfo"
 
-const StepTwo = ({ data, setData, setCanProgress, message, setMessage }) => {
+const StepTwo = ({ data, setData, setCanProgress, message, setMessage, disabledText, classes }) => {
   const { t } = useTranslation()
 
   const [isEmailValid, setIsEmailValid] = useState(false)
@@ -35,38 +34,13 @@ const StepTwo = ({ data, setData, setCanProgress, message, setMessage }) => {
   }, [isEmailValid, setCanProgress, isPasswordValid])
 
   return (
-    <>
-      <div className="welcome-formheader">
-        <h3>{t("contactInfo")}</h3>
-      </div>
-      <Form className="welcome-form">
-        <div className="welcome-form-inputs">
-          <TextInput
-            onChange={onInput}
-            value={data.email}
-            name="email"
-            label={`${t("email")} *`}
-            type="text"
-          />
-          <TextInput
-            onChange={onInput}
-            value={data.mobile}
-            name="mobile"
-            label={`${t("mobile")} *`}
-            type="text"
-          />
-          <TextInput
-            onChange={onInput}
-            value={data.password}
-            name="password"
-            label={`${t("password")} *`}
-            type="password"
-          />
-          {message && <p className="input-message">{message}</p>}
-          <p className="text-blue1">*{t("required")}</p>
-        </div>
-      </Form>
-    </>
+    <ContactInfo
+      data={data}
+      onInput={onInput}
+      disabledText={disabledText}
+      message={message}
+      classes={classes}
+    />
   )
 }
 

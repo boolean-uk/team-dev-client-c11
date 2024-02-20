@@ -54,6 +54,9 @@
   "teachers": "Athrawon",
   "units": "unedau",
   "welcome": "Croeso i Cohort Manager",
+  "whatsOnYourMind": "Beth sy'n ar dy feddwl?",
   "profileImageUrl": "URL delwedd proffil",
-  "enterProfileImageUrl": "Rhowch eich URL delwedd proffil"
+  "enterProfileImageUrl": "Rhowch eich URL delwedd proffil",
+  "passwordOk": "Mae'r cyfrinair yn iawn.",
+  "invalidPassword": "Rhaid i'r cyfrinair gynnwys o leiaf un llythyren fawr, un rhif ac un nod arbennig."
 }

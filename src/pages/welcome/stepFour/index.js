@@ -1,33 +1,20 @@
-import Form from "../../../components/form"
-import { useTranslation } from "react-i18next"
+import Bio from "../../../components/bio"
 
-const StepFour = ({ data, setData }) => {
-  const { t } = useTranslation()
+const StepFour = ({ data, setData, disabledText, classes }) => {
+  const onInput = (e) => {
+    setData(e)
+  }
 
   const splitWord = data.bio.trim(/\s+/g, "").length
 
   return (
-    <>
-      <div className="welcome-formheader">
-        <h3>Bio</h3>
-      </div>
-      <Form className={"welcome-form"}>
-        <p>{t("bio")}</p>
-        <div className="welcome-form-inputs">
-          <textarea
-            onChange={setData}
-            value={data.bio}
-            name="bio"
-            placeholder={t("tellUsAboutYourselfMessage")}
-            label={t("bio")}
-            type={"textarea"}
-            maxLength={3000}
-          />
-
-          <p className="word-count">{splitWord}/3000</p>
-        </div>
-      </Form>
-    </>
+    <Bio
+      data={data}
+      onInput={onInput}
+      splitWord={splitWord}
+      disabledText={disabledText}
+      classes={classes}
+    />
   )
 }
 

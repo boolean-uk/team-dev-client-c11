@@ -78,11 +78,24 @@ const AuthProvider = ({ children }) => {
     setLogout(true)
   }
 
-  const handleRegister = async (email, password) => {
-    const res = await register(email, password)
-    setToken(res.data.token)
+  const checkPassword = (password) => {
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasNumber = /\d/.test(password);
+    const hasSpecialChar = /[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/.test(password);
 
-    navigate("/verification")
+    return password.length >= 8 && hasUppercase && hasNumber && hasSpecialChar
+  }
+
+  const handleRegister = async (email, password) => {
+    if (checkPassword(password)) {
+      const res = await register(email, password)
+      
+      setToken(res.data.token)
+      
+      navigate("/verification")
+    } else {
+      return false
+    }
   }
 
   const handleCreateProfile = async (
@@ -126,6 +139,7 @@ const AuthProvider = ({ children }) => {
     onLogout: handleLogout,
     onRegister: handleRegister,
     onCreateProfile: handleCreateProfile,
+    checkPassword: checkPassword,
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

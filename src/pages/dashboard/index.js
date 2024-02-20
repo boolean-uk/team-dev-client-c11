@@ -1,15 +1,21 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import Button from "../../components/button"
 import Card from "../../components/card"
 import CreatePostModal from "../../components/createPostModal"
 import Posts from "../../components/posts"
 import useModal from "../../hooks/useModal"
 import "./style.css"
-import { getCohorts, getPosts, getUsers } from "../../service/apiClient"
+import {
+  getCohorts,
+  getPosts,
+  getTeachers,
+  getUsers,
+} from "../../service/apiClient"
 import UsersList from "../../components/usersList"
 import SearchUserAside from "../../components/searchUserAside"
 import CohortList from "../../components/cohortList"
 import { useTranslation } from "react-i18next"
+import TeacherList from "../../components/teacherList"
 
 const Dashboard = () => {
   const { t } = useTranslation()
@@ -17,6 +23,7 @@ const Dashboard = () => {
   const [posts, setPosts] = useState([])
   const [myCohort, setMyCohort] = useState([])
   const [cohorts, setCohorts] = useState(null)
+  const [teachers, setTeachers] = useState([])
 
   const sortPosts = (fetchedPosts) => {
     const sortedPosts = fetchedPosts.sort(
@@ -25,26 +32,33 @@ const Dashboard = () => {
     return sortedPosts
   }
 
-  const getAllPosts = () => {
+  const getAllPosts = useCallback(() => {
     getPosts()
       .then(sortPosts)
       .then(setPosts)
       .catch((error) => {
         console.error("Error get all posts sorted:", error.message)
       })
-  }
+  }, [])
 
-  const getAllUsers = () => {
+  const getAllUsers = useCallback(() => {
     getUsers().then(setMyCohort)
-  }
+  }, [])
 
-  const getAllCohorts = () => {
+  const getAllCohorts = useCallback(() => {
     getCohorts().then(setCohorts)
-  }
+  }, [])
 
-  useEffect(getAllPosts, [])
-  useEffect(getAllUsers, [])
-  useEffect(getAllCohorts, [])
+  const getAllTeachers = useCallback(() => {
+    getTeachers().then(setTeachers)
+  }, [])
+
+  useEffect(() => {
+    getAllPosts()
+    getAllUsers()
+    getAllCohorts()
+    getAllTeachers()
+  }, [getAllPosts, getAllUsers, getAllCohorts, getAllTeachers])
 
   const { openModal, setModal } = useModal()
 
@@ -91,6 +105,9 @@ const Dashboard = () => {
       <aside>
         <SearchUserAside />
         {showAllCohortsOrMine()}
+        <Card header={t("Teachers")}>
+          <TeacherList teachers={teachers} />
+        </Card>
       </aside>
     </>
   )

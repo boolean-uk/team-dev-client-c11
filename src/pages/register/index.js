@@ -7,12 +7,12 @@ import "./register.css";
 import { useTranslation } from "react-i18next";
 
 const Register = () => {
-  const { onRegister } = useAuth();
+  const { onRegister, checkPassword } = useAuth();
   const [formData, setFormData] = useState({ email: "", password: "" });
   const { t } = useTranslation()
 
-  const onChange = (e) => {
-    const { name, value } = e.target;
+  const onChange = (event) => {
+    const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
 
@@ -29,7 +29,7 @@ const Register = () => {
           <form>
             <TextInput
               value={formData.email}
-              onChange={onChange}
+              onChange={(event) => onChange(event)}
               type="email"
               name="email"
               label={`${t('email')} *`}
@@ -42,9 +42,10 @@ const Register = () => {
             type={"password"}
             />
           </form>
+          <p>{checkPassword(formData.password) ? t('passwordOk') : t('invalidPassword')}</p>
           <Button
             text={t('signUp')}
-            onClick={() => onRegister(formData.email, formData.password)}
+            onClick={() => checkPassword(formData.password) ? onRegister(formData.email, formData.password) : false }
             classes="green width-full"
           />
         </div>

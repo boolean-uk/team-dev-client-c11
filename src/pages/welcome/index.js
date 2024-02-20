@@ -13,6 +13,9 @@ const Welcome = () => {
   const [message, setMessage] = useState("")
   const { t } = useTranslation()
 
+  const [disabledText, setDisabledText] = useState(false)
+  const [classes, setClasses] = useState("")
+
   const { onCreateProfile } = useAuth()
 
   const [profile, setProfile] = useState({
@@ -28,6 +31,7 @@ const Welcome = () => {
     cohort: "",
     startDate: "",
     endDate: "",
+    imageUrl: "",
   })
 
   const onChange = (event) => {
@@ -38,8 +42,6 @@ const Welcome = () => {
       [name]: value,
     })
   }
-
-
 
   const onComplete = () => {
     onCreateProfile(
@@ -74,6 +76,8 @@ const Welcome = () => {
         setCanProgress={setCanProgress}
       >
         <StepOne
+          disabledText={disabledText}
+          classes={classes}
           setMessage={setMessage}
           message={message}
           data={profile}
@@ -81,6 +85,8 @@ const Welcome = () => {
           setCanProgress={setCanProgress}
         />
         <StepTwo
+          disabledText={disabledText}
+          classes={classes}
           setMessage={setMessage}
           message={message}
           data={profile}
@@ -88,13 +94,20 @@ const Welcome = () => {
           setCanProgress={setCanProgress}
         />
         <StepThree
+          disabledText={disabledText}
+          classes={classes}
           setMessage={setMessage}
           message={message}
           data={profile}
           setData={onChange}
           setCanProgress={setCanProgress}
         />
-        <StepFour data={profile} setData={onChange} />
+        <StepFour
+          data={profile}
+          setData={onChange}
+          disabledText={disabledText}
+          classes={classes}
+        />
       </Stepper>
     </main>
   )
