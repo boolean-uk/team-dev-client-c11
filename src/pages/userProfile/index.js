@@ -3,8 +3,8 @@ import Card from "../../components/card"
 import ProfileCircle from "../../components/profileCircle"
 import "./style.css"
 import { useEffect, useState } from "react"
-import { useParams } from 'react-router-dom';
-import { getUserById } from '../../service/apiClient.js'
+import { useParams } from "react-router-dom"
+import { getUserById } from "../../service/apiClient.js"
 import Button from "../../components/button"
 import BasicInfo from "../../components/basic-info"
 import ContactInfo from "../../components/contactInfo"
@@ -12,10 +12,8 @@ import TrainingInfo from "../../components/trainingInfo"
 import Bio from "../../components/bio"
 import ProfessionalInfo from "../../components/professionalinfo"
 
-
-
 const UserProfile = () => {
-  const {id} = useParams()
+  const { id } = useParams()
   const [disabledText, setDisabledText] = useState(true)
   const [saveButton, setSave] = useState(false)
   const [isTeacher, setisTeacher] = useState(false)
@@ -36,19 +34,25 @@ const UserProfile = () => {
   })
   const [tempUser] = useState(user)
 
-  const getUsers = () => getUserById(id)
-  setUser(getUsers)
+  useEffect(() => {
+    getUserById(id).then((user) => {
+      setUser(user)
+    })
+  }, [id])
+
+  console.log(user)
 
   const initials =
-  user && user.firstName && user.lastName
-    ? `${user.firstName.charAt(0)}${user.lastName.charAt(0)}`
-    : "A"
+    user && user.firstName && user.lastName
+      ? `${user.firstName.charAt(0)}${user.lastName.charAt(0)}`
+      : "A"
 
   let classes = ""
-  if(saveButton === false){classes = "locked-input"}
+  if (saveButton === false) {
+    classes = "locked-input"
+  }
 
   const splitWord = user.bio.trim(/\s+/g, "").length
-
 
   const onInput = (event) => {
     const { name, value } = event.target
@@ -61,7 +65,6 @@ const UserProfile = () => {
 
   const { t } = useTranslation()
 
-  
   const revert = () => {
     setUser(tempUser)
     console.log("revert")
@@ -74,7 +77,6 @@ const UserProfile = () => {
   }
 
   useEffect(() => {
-
     console.log("useEffect")
   }, [])
 
@@ -131,12 +133,12 @@ const UserProfile = () => {
           </section>
 
           <section className={`${classes}`}>
-            <Bio 
-
-            onInput={onInput} 
-            disabledText={disabledText} 
-            data={user}
-            splitWord={splitWord} />
+            <Bio
+              onInput={onInput}
+              disabledText={disabledText}
+              data={user}
+              splitWord={splitWord}
+            />
           </section>
         </div>
 
