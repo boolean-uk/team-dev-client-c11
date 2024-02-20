@@ -16,19 +16,19 @@ const UserProfile = () => {
   const [saveButton, setSave] = useState(false)
   const [isTeacher, setisTeacher] = useState(false)
   const [user, setUser] = useState({
-    firstName: "",
-    lastName: "",
-    githubUsername: "",
-    bio: "",
-    email: "",
-    mobile: "",
-    password: "",
-    role: "",
-    specialism: "",
-    cohort: "",
-    startDate: "",
-    endDate: "",
-    imageUrl: "",
+    firstName: "Lukas",
+    lastName: "Dembicki",
+    githubUsername: "PeachyOmnivore",
+    bio: "Hello this is my bio",
+    email: "email@email.com",
+    mobile: "07770777077",
+    password: "Password123!",
+    role: "Student",
+    specialism: "Full-Stack",
+    cohort: "11",
+    startDate: "121212",
+    endDate: "121212",
+    imageUrl: "image@image.com",
   })
 
   const initials =
@@ -38,6 +38,9 @@ const UserProfile = () => {
 
   let classes = ""
   if(saveButton === false){classes = "locked-input"}
+
+  const splitWord = user.bio.trim(/\s+/g, "").length
+
 
   const onInput = (event) => {
     const { name, value } = event.target
@@ -91,7 +94,7 @@ const UserProfile = () => {
           </section>
 
           {isTeacher ? (
-            <section>
+            <section className={`${classes}`}>
               <ProfessionalInfo
                 onInput={onInput}
                 disabledText={disabledText}
@@ -99,7 +102,7 @@ const UserProfile = () => {
               />
             </section>
           ) : (
-            <section>
+            <section className={`${classes}`}>
               <TrainingInfo
                 onInput={onInput}
                 disabledText={disabledText}
@@ -108,7 +111,7 @@ const UserProfile = () => {
             </section>
           )}
 
-          <section>
+          <section className={`${classes}`}>
             <ContactInfo
               onInput={onInput}
               disabledText={disabledText}
@@ -116,8 +119,13 @@ const UserProfile = () => {
             />
           </section>
 
-          <section>
-            <Bio onInput={onInput} disabledText={disabledText} data={user} />
+          <section className={`${classes}`}>
+            <Bio 
+
+            onInput={onInput} 
+            disabledText={disabledText} 
+            data={user}
+            splitWord={splitWord} />
           </section>
         </div>
 

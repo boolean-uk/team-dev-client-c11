@@ -34,4 +34,10 @@
 
 .locked-input form input {
   background: white;
+  color: black;
+}
+
+.locked-input textarea {
+  background: white;
+  color: black;
 }
