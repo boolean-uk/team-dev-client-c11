@@ -4,7 +4,7 @@ import ProfileCircle from "../../components/profileCircle"
 import "./style.css"
 import { useEffect, useState } from "react"
 import { useParams } from 'react-router-dom';
-import { get } from '../../service/apiClient.js'
+import { getUserById } from '../../service/apiClient.js'
 import Button from "../../components/button"
 import BasicInfo from "../../components/basic-info"
 import ContactInfo from "../../components/contactInfo"
@@ -35,6 +35,9 @@ const UserProfile = () => {
     imageUrl: "image@image.com",
   })
   const [tempUser] = useState(user)
+
+  const getUsers = () => getUserById(id)
+  setUser(getUsers)
 
   const initials =
   user && user.firstName && user.lastName
