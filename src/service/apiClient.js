@@ -90,6 +90,10 @@ async function getUsers() {
   return res.data.users
 }
 
+async function getUserById(userId) {
+    return get(`users/:${userId}`)
+  }
+
 async function put(endpoint, data, auth = true) {
   return await request("PUT", endpoint, data, auth)
 }
@@ -132,6 +136,11 @@ async function toggleLike(postId) {
   return response
 }
 
+async function getStudents() {
+  const response = await get('students')
+  return response.data.students
+}
+
 export {
   login,
   getPosts,
@@ -149,6 +158,8 @@ export {
   getCohorts,
   getTeachers,
   getStudentsByCohortId,
+  getUserById,
+  getStudents
   getSelfTeacher,
   getSelfStudent
 }
