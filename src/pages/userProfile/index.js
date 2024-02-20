@@ -3,6 +3,8 @@ import Card from "../../components/card"
 import ProfileCircle from "../../components/profileCircle"
 import "./style.css"
 import { useEffect, useState } from "react"
+import { useParams } from 'react-router-dom';
+import { get } from '../../service/apiClient.js'
 import Button from "../../components/button"
 import BasicInfo from "../../components/basic-info"
 import ContactInfo from "../../components/contactInfo"
@@ -11,7 +13,9 @@ import Bio from "../../components/bio"
 import ProfessionalInfo from "../../components/professionalinfo"
 
 
+
 const UserProfile = () => {
+  const {id} = useParams()
   const [disabledText, setDisabledText] = useState(true)
   const [saveButton, setSave] = useState(false)
   const [isTeacher, setisTeacher] = useState(false)
@@ -30,7 +34,7 @@ const UserProfile = () => {
     endDate: "121212",
     imageUrl: "image@image.com",
   })
-  const [tempUser, setTempUser] = useState(user)
+  const [tempUser] = useState(user)
 
   const initials =
   user && user.firstName && user.lastName
@@ -67,6 +71,7 @@ const UserProfile = () => {
   }
 
   useEffect(() => {
+
     console.log("useEffect")
   }, [])
 
