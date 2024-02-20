@@ -159,7 +159,7 @@ export {
   getTeachers,
   getStudentsByCohortId,
   getUserById,
-  getStudents
+  getStudents,
   getSelfTeacher,
   getSelfStudent
 }
