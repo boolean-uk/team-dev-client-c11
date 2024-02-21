@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useContext } from "react"
 import Button from "../../components/button"
 import Card from "../../components/card"
 import CreatePostModal from "../../components/createPostModal"
@@ -9,8 +9,8 @@ import {
   getCohorts,
   getPosts,
   getTeachers,
-  getSelf, getStudentsByCohortId,
-  getStudents
+  getStudents,
+  getStudentsByCohortId
 } from "../../service/apiClient"
 import UsersList from "../../components/usersList"
 import SearchUserAside from "../../components/searchUserAside"
@@ -18,9 +18,11 @@ import CohortList from "../../components/cohortList"
 import { useTranslation } from "react-i18next"
 import TeacherList from "../../components/teacherList"
 import StudentsList from "../../components/studentsList"
+import { AuthContext } from "../../context/auth"
 
 const Dashboard = () => {
   const { t } = useTranslation()
+  const loggedInStudent = useContext(AuthContext).loggedInStudent
 
   const [posts, setPosts] = useState([])
   const [myCohort, setMyCohort] = useState([])
@@ -43,36 +45,13 @@ const Dashboard = () => {
         console.error("Error get all posts sorted:", error.message)
       })
   }, [])
-
-  const getAllUsers = useCallback(() => {
-    getUsers().then(setMyCohort)
+    
+  const getMyCohort = useCallback((cohortId) => {
+    getStudentsByCohortId(cohortId).then(setMyCohort)
   }, [])
 
   const getAllCohorts = useCallback(() => {
     getCohorts().then(setCohorts)
-  }
-
-  const isInACohort = () =>
-    getSelf().then((user) => {
-      if (!user.cohortId) {
-        throw new Error("no cohort assigned to the current user")
-      }
-      return user.cohortId
-    })
-
-  const getStudentsInMyCohort = () => {
-    isInACohort()
-      .then(
-        (cohortId) => getStudentsByCohortId(cohortId),
-        (error) =>
-          console.error("Error getting the user's cohort:", error.message)
-      )
-      .then(setMyCohort)
-  }
-
-  useEffect(getAllPosts, [])
-  useEffect(getStudentsInMyCohort, [])
-  useEffect(getAllCohorts, [])
   }, [])
 
   const getAllTeachers = useCallback(() => {
@@ -85,14 +64,13 @@ const Dashboard = () => {
 
   useEffect(() => {
     getAllPosts()
-    getAllUsers()
+    loggedInStudent && getMyCohort(loggedInStudent.cohortId)
     getAllCohorts()
     getAllTeachers()
     getAllStudents()
-  }, [getAllPosts, getAllUsers, getAllCohorts, getAllTeachers, getAllStudents])
+  }, [getAllPosts, getMyCohort, getAllCohorts, getAllTeachers, getAllStudents, loggedInStudent])
 
   const { openModal, setModal } = useModal()
-
 
   const showModal = () => {
     setModal(
@@ -102,9 +80,6 @@ const Dashboard = () => {
 
     openModal()
   }
-
-  
-
 
   const shouldRenderList = (list) => Array.isArray(list)
 
