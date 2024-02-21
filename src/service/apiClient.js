@@ -9,12 +9,21 @@ async function register(email, password) {
   return await login(email, password)
 }
 
-async function createProfile(userId, firstName, lastName, githubUrl, bio) {
-  return await patch(`users/${userId}`, {
+async function createProfile(userId, firstName, lastName, githubUsername, biography, email, mobile,password,role,specialism, cohort,startDate, endDate, imageUrl) {
+  return await put(`users/${userId}`, {
     firstName,
     lastName,
-    githubUrl,
-    bio,
+    githubUsername,
+    biography,
+    email,
+    mobile,
+    password,
+    role,
+    specialism,
+    cohort,
+    startDate,
+    endDate,
+    imageUrl,
   })
 }
 
