@@ -23,7 +23,7 @@ import { AuthContext } from "../../context/auth"
 const Dashboard = () => {
   const { t } = useTranslation()
   const cohortId = useContext(AuthContext).loggedInStudent?.cohortId
-
+  
   const [posts, setPosts] = useState([])
   const [myCohort, setMyCohort] = useState([])
   const [cohorts, setCohorts] = useState(null)
@@ -68,7 +68,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     getAllPosts()
-    getMyCohort(cohortId)
+    cohortId && getMyCohort(cohortId)
     getAllCohorts()
     getAllTeachers()
     getAllStudents()
