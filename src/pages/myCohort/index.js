@@ -9,10 +9,14 @@ const MyCohort = () => {
   const [students, setStudents] = useState([])
   const [teachers, setTeachers] = useState([])
 
-  const loggedInStudent = useContext(AuthContext).loggedInStudent
+  const cohortId = useContext(AuthContext).loggedInStudent?.cohortId
 
   const getMyClassmates = useCallback((cohortId) => {
-    getStudentsByCohortId(cohortId).then(setStudents)
+    getStudentsByCohortId(cohortId)
+      .then(setStudents)
+      .catch((err) =>
+        console.log("Error getting students by cohort ID", err.message)
+      )
   }, [])
 
   const getAllTeachers = useCallback(() => getTeachers().then(setTeachers), [])
@@ -20,18 +24,13 @@ const MyCohort = () => {
   useEffect(() => {
     getAllTeachers()
 
-    if (loggedInStudent) {
-      getMyClassmates(loggedInStudent.cohortId)
-    }
-  }, [getAllTeachers, getMyClassmates, loggedInStudent])
+    cohortId && getMyClassmates(cohortId)
+  }, [getAllTeachers, getMyClassmates, cohortId])
 
   return (
     <>
       <main>
-        <MyCohortDetails
-          students={students}
-          currentCohort={loggedInStudent ? loggedInStudent.cohortId : "0"}
-        />
+        <MyCohortDetails students={students} currentCohort={cohortId ?? "0"} />
       </main>
 
       <aside>
