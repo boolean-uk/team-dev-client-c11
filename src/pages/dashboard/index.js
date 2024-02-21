@@ -10,7 +10,7 @@ import {
   getPosts,
   getTeachers,
   getStudents,
-  getStudentsByCohortId
+  getStudentsByCohortId,
 } from "../../service/apiClient"
 import UsersList from "../../components/usersList"
 import SearchUserAside from "../../components/searchUserAside"
@@ -22,7 +22,10 @@ import { AuthContext } from "../../context/auth"
 
 const Dashboard = () => {
   const { t } = useTranslation()
-  const loggedInStudent = useContext(AuthContext).loggedInStudent
+  let loggedInStudent = useContext(AuthContext).loggedInStudent
+  if (!loggedInStudent) {
+    loggedInStudent = { cohortId: undefined }
+  }
 
   const [posts, setPosts] = useState([])
   const [myCohort, setMyCohort] = useState([])
@@ -45,9 +48,13 @@ const Dashboard = () => {
         console.error("Error get all posts sorted:", error.message)
       })
   }, [])
-    
+
   const getMyCohort = useCallback((cohortId) => {
-    getStudentsByCohortId(cohortId).then(setMyCohort)
+    getStudentsByCohortId(cohortId)
+      .then(setMyCohort)
+      .catch((error) => {
+        console.error("Error getting my cohort:", error)
+      })
   }, [])
 
   const getAllCohorts = useCallback(() => {
@@ -64,11 +71,18 @@ const Dashboard = () => {
 
   useEffect(() => {
     getAllPosts()
-    loggedInStudent && getMyCohort(loggedInStudent.cohortId)
+    getMyCohort(loggedInStudent.cohortId)
     getAllCohorts()
     getAllTeachers()
     getAllStudents()
-  }, [getAllPosts, getMyCohort, getAllCohorts, getAllTeachers, getAllStudents, loggedInStudent])
+  }, [
+    getAllPosts,
+    getMyCohort,
+    getAllCohorts,
+    getAllTeachers,
+    getAllStudents,
+    loggedInStudent,
+  ])
 
   const { openModal, setModal } = useModal()
 
@@ -86,14 +100,14 @@ const Dashboard = () => {
   const showAllCohortsOrMine = () => {
     if (shouldRenderList(cohorts)) {
       return (
-      <>
-        <Card header={t("Cohorts")}>
-          <CohortList cohorts={cohorts} />
-        </Card>
-        <Card header={t("Students")}>
-         <StudentsList students={students}/>
-       </Card>
-      </>
+        <>
+          <Card header={t("Cohorts")}>
+            <CohortList cohorts={cohorts} />
+          </Card>
+          <Card header={t("Students")}>
+            <StudentsList students={students} />
+          </Card>
+        </>
       )
     }
     return (
