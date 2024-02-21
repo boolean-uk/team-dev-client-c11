@@ -22,10 +22,7 @@ import { AuthContext } from "../../context/auth"
 
 const Dashboard = () => {
   const { t } = useTranslation()
-  let loggedInStudent = useContext(AuthContext).loggedInStudent
-  if (!loggedInStudent) {
-    loggedInStudent = { cohortId: undefined }
-  }
+  const cohortId = useContext(AuthContext).loggedInStudent?.cohortId
 
   const [posts, setPosts] = useState([])
   const [myCohort, setMyCohort] = useState([])
@@ -71,7 +68,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     getAllPosts()
-    getMyCohort(loggedInStudent.cohortId)
+    getMyCohort(cohortId)
     getAllCohorts()
     getAllTeachers()
     getAllStudents()
@@ -81,7 +78,7 @@ const Dashboard = () => {
     getAllCohorts,
     getAllTeachers,
     getAllStudents,
-    loggedInStudent,
+    cohortId,
   ])
 
   const { openModal, setModal } = useModal()
