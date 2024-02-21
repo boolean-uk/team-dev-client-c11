@@ -1,27 +1,41 @@
-import { useEffect, useState } from "react"
+import { useCallback, useContext, useEffect, useState } from "react"
 import MyExercises from "../../components/myCohortExercises"
 import MyTeachers from "../../components/myCohortTeachers"
 import MyCohortDetails from "../../components/myCohortDetails"
-import { getUsers, getSelf } from "../../service/apiClient"
+import { getStudentsByCohortId, getTeachers } from "../../service/apiClient"
+import { AuthContext } from "../../context/auth"
 
 const MyCohort = () => {
-  const [users, setUsers] = useState([])
+  const [students, setStudents] = useState([])
+  const [teachers, setTeachers] = useState([])
+
+  const loggedInStudent = useContext(AuthContext).loggedInStudent
+
+  const getMyClassmates = useCallback((cohortId) => {
+    getStudentsByCohortId(cohortId).then(setStudents)
+  }, [])
+
+  const getAllTeachers = useCallback(() => getTeachers().then(setTeachers), [])
 
   useEffect(() => {
-    getUsers().then((users) => {
-			getSelf()
-				.then((self) => setUsers(users.filter((user) => user.cohort_id === self.cohort_id &&	user.role === "STUDENT")))
-		})
-  }, [])
+    getAllTeachers()
+
+    if (loggedInStudent) {
+      getMyClassmates(loggedInStudent.cohortId)
+    }
+  }, [getAllTeachers, getMyClassmates, loggedInStudent])
 
   return (
     <>
       <main>
-        <MyCohortDetails users={users} />
+        <MyCohortDetails
+          students={students}
+          currentCohort={loggedInStudent ? loggedInStudent.cohortId : "0"}
+        />
       </main>
 
       <aside>
-        <MyTeachers users={users} />
+        <MyTeachers teachers={teachers} />
         <MyExercises />
       </aside>
     </>
