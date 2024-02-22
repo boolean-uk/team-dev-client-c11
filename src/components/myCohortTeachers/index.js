@@ -10,8 +10,8 @@ const MyTeachers = ({ teachers }) => {
     <Card>
       <h3 className="my-cohort-teachers--header">{t("teachers")}</h3>
       <ul className="my-cohort-teachers--list">
-        {teachers.map((user, idx) => (
-          <UserCard user={user.user.profile} key={idx} />
+        {teachers.map((teacher, idx) => (
+          <UserCard user={teacher.user.profile} key={idx} />
         ))}
       </ul>
     </Card>
