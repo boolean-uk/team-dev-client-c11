@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next"
 import Card from "../../components/card"
 import ProfileCircle from "../../components/profileCircle"
 import "./style.css"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { getUserById } from "../../service/apiClient.js"
 import Button from "../../components/button"
@@ -18,30 +18,35 @@ const UserProfile = () => {
   const [saveButton, setSave] = useState(false)
   const [isTeacher, setisTeacher] = useState(false)
   const [user, setUser] = useState({
-    firstName: "Lukas",
-    lastName: "Dembicki",
-    githubUsername: "PeachyOmnivore",
-    bio: "Hello this is my bio",
-    email: "email@email.com",
-    mobile: "07770777077",
-    password: "Password123!",
-    role: "STUDENT",
-    specialism: "Full-Stack",
-    cohort: "11",
-    startDate: "121212",
-    endDate: "121212",
-    imageUrl: "image@image.com",
+    firstName: "",
+    lastName: "",
+    githubUsername: "",
+    bio: "",
+    email: "",
+    mobile: "",
+    password: "",
+    role: "",
+    specialism: "",
+    cohort: "",
+    startDate: "",
+    endDate: "",
+    imageUrl: "",
   })
- 
-  useEffect(() => { 
+
+  const [tempUser, setTempUser] = useState(user)
+  console.log("ID....", id)
+  console.log("TEMP USER....", tempUser)
+  console.log("USER....", user)
+  
+  useEffect(() => {
     getUserById(id).then((user) => {
       setUser(user.data.user)
+      setTempUser(user.data.user)
+      console.log("USE EFFECT RUNNING")
+      console.log("USER INFO INSIDE CALLBACK....", user.data.user)
     })
   }, [id])
-  
-  const [tempUser] = useState(user)
-  console.log("temp user", tempUser)
-  console.log("USER", user)
+
 
   const initials =
     user && user.firstName && user.lastName
@@ -68,7 +73,6 @@ const UserProfile = () => {
 
   const revert = () => {
     setUser(tempUser)
-
     console.log("revert")
     return
   }
@@ -77,7 +81,6 @@ const UserProfile = () => {
     console.log("save")
     return
   }
-
 
   return (
     <main>
@@ -90,7 +93,7 @@ const UserProfile = () => {
           <ProfileCircle initials={initials} />
           <section>
             <h4>
-              {user.firstName} {user.lastName}
+              {/* {user.firstName} {user.lastName} */}
             </h4>
             <p>{user.title}</p>
           </section>
