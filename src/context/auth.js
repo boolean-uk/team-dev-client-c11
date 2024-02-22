@@ -106,6 +106,9 @@ const AuthProvider = ({ children }) => {
 
   const handleLogout = () => {
     setLogout(true)
+    setToken(null)
+    setUserId(null)
+    setUserRole(null)
   }
 
   const checkPassword = (password) => {
