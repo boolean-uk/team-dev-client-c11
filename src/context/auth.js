@@ -77,7 +77,7 @@ const AuthProvider = ({ children }) => {
       throw Error("No role assigned to this user")
     }
 
-    if (userRole) {
+    if (userRole && userRole !== 'TBA') {
       getAndSetStudentOrTeacher(userRole)
     }
   }, [
