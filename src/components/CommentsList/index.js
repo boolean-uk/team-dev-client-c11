@@ -23,6 +23,7 @@ const CommentsList = ({ postId, isComment }) => {
               key={comment.id}
               name={comment.name}
               content={comment.content}
+              user={comment.author}
             />
           ))
         ) : (

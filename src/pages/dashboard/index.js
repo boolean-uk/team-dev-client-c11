@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useContext } from "react"
 import Button from "../../components/button"
 import Card from "../../components/card"
 import CreatePostModal from "../../components/createPostModal"
@@ -9,8 +9,8 @@ import {
   getCohorts,
   getPosts,
   getTeachers,
-  getUsers,
-  getStudents
+  getStudents,
+  getStudentsByCohortId,
 } from "../../service/apiClient"
 import UsersList from "../../components/usersList"
 import SearchUserAside from "../../components/searchUserAside"
@@ -18,10 +18,12 @@ import CohortList from "../../components/cohortList"
 import { useTranslation } from "react-i18next"
 import TeacherList from "../../components/teacherList"
 import StudentsList from "../../components/studentsList"
+import { AuthContext } from "../../context/auth"
 
 const Dashboard = () => {
   const { t } = useTranslation()
-
+  const cohortId = useContext(AuthContext).loggedInStudent?.cohortId
+  
   const [posts, setPosts] = useState([])
   const [myCohort, setMyCohort] = useState([])
   const [cohorts, setCohorts] = useState(null)
@@ -44,8 +46,12 @@ const Dashboard = () => {
       })
   }, [])
 
-  const getAllUsers = useCallback(() => {
-    getUsers().then(setMyCohort)
+  const getMyCohort = useCallback((cohortId) => {
+    getStudentsByCohortId(cohortId)
+      .then(setMyCohort)
+      .catch((error) => {
+        console.error("Error getting my cohort:", error)
+      })
   }, [])
 
   const getAllCohorts = useCallback(() => {
@@ -62,11 +68,18 @@ const Dashboard = () => {
 
   useEffect(() => {
     getAllPosts()
-    getAllUsers()
+    cohortId && getMyCohort(cohortId)
     getAllCohorts()
     getAllTeachers()
     getAllStudents()
-  }, [getAllPosts, getAllUsers, getAllCohorts, getAllTeachers, getAllStudents])
+  }, [
+    getAllPosts,
+    getMyCohort,
+    getAllCohorts,
+    getAllTeachers,
+    getAllStudents,
+    cohortId,
+  ])
 
   const { openModal, setModal } = useModal()
 
@@ -84,14 +97,14 @@ const Dashboard = () => {
   const showAllCohortsOrMine = () => {
     if (shouldRenderList(cohorts)) {
       return (
-      <>
-        <Card header={t("Cohorts")}>
-          <CohortList cohorts={cohorts} />
-        </Card>
-        <Card header={t("Students")}>
-         <StudentsList students={students}/>
-       </Card>
-      </>
+        <>
+          <Card header={t("Cohorts")}>
+            <CohortList cohorts={cohorts} />
+          </Card>
+          <Card header={t("Students")}>
+            <StudentsList students={students} />
+          </Card>
+        </>
       )
     }
     return (

@@ -34,7 +34,7 @@ const Post = ({
 
   const userInitials = name.match(/\b(\w)/g)
 
-  const { userId } = useAuth()
+  const { userId, userRole } = useAuth()
 
   const { t } = useTranslation()
   const showModal = () => {
@@ -94,7 +94,9 @@ const Post = ({
             <small>{formatDate}</small>
           </div>
 
-          {userPostId === userId && <OptionsIcon showModel={showModal} />}
+          {(userPostId === userId || userRole === "TEACHER") && (
+            <OptionsIcon showModel={showModal} />
+          )}
         </section>
 
         <section className="post-content">

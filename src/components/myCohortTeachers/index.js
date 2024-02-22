@@ -1,11 +1,10 @@
-import UserCard from "../userCard";
-import Card from "../card";
-import "./style.css";
-import { useTranslation } from "react-i18next";
+import UserCard from "../userCard"
+import Card from "../card"
+import "./style.css"
+import { useTranslation } from "react-i18next"
 
-const MyTeachers = ({ users }) => {
-  const {t} = useTranslation()
-  const teachers = users.filter((user) => user.role === "TEACHER");
+const MyTeachers = ({ teachers }) => {
+  const { t } = useTranslation()
 
   return (
     <Card>
@@ -16,7 +15,7 @@ const MyTeachers = ({ users }) => {
         ))}
       </ul>
     </Card>
-  );
-};
+  )
+}
 
-export default MyTeachers;
+export default MyTeachers
