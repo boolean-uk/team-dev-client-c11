@@ -19,11 +19,13 @@ import { useTranslation } from "react-i18next"
 import TeacherList from "../../components/teacherList"
 import StudentsList from "../../components/studentsList"
 import { AuthContext } from "../../context/auth"
+import useAuth from "../../hooks/useAuth"
 
 const Dashboard = () => {
   const { t } = useTranslation()
   const cohortId = useContext(AuthContext).loggedInStudent?.cohortId
-  
+  const { userRole } = useAuth()
+
   const [posts, setPosts] = useState([])
   const [myCohort, setMyCohort] = useState([])
   const [cohorts, setCohorts] = useState(null)
@@ -67,11 +69,17 @@ const Dashboard = () => {
   }, [])
 
   useEffect(() => {
+    if (userRole === "STUDENT" && cohortId) {
+      getMyCohort(cohortId)
+    }
+
+    if (userRole === "TEACHER") {
+      getAllCohorts()
+      getAllTeachers()
+      getAllStudents()
+    }
+
     getAllPosts()
-    cohortId && getMyCohort(cohortId)
-    getAllCohorts()
-    getAllTeachers()
-    getAllStudents()
   }, [
     getAllPosts,
     getMyCohort,
@@ -79,6 +87,7 @@ const Dashboard = () => {
     getAllTeachers,
     getAllStudents,
     cohortId,
+    userRole,
   ])
 
   const { openModal, setModal } = useModal()
