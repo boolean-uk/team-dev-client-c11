@@ -25,22 +25,23 @@ const UserProfile = () => {
     email: "email@email.com",
     mobile: "07770777077",
     password: "Password123!",
-    role: "Student",
+    role: "STUDENT",
     specialism: "Full-Stack",
     cohort: "11",
     startDate: "121212",
     endDate: "121212",
     imageUrl: "image@image.com",
   })
-  const [tempUser] = useState(user)
-
-  useEffect(() => {
+ 
+  useEffect(() => { 
     getUserById(id).then((user) => {
-      setUser(user)
+      setUser(user.data.user)
     })
   }, [id])
-
-  console.log(user)
+  
+  const [tempUser] = useState(user)
+  console.log("temp user", tempUser)
+  console.log("USER", user)
 
   const initials =
     user && user.firstName && user.lastName
@@ -52,7 +53,7 @@ const UserProfile = () => {
     classes = "locked-input"
   }
 
-  const splitWord = user.bio.trim(/\s+/g, "").length
+  // const splitWord = user.bio.trim(/\s+/g, "").length
 
   const onInput = (event) => {
     const { name, value } = event.target
@@ -67,6 +68,7 @@ const UserProfile = () => {
 
   const revert = () => {
     setUser(tempUser)
+
     console.log("revert")
     return
   }
@@ -76,9 +78,6 @@ const UserProfile = () => {
     return
   }
 
-  useEffect(() => {
-    console.log("useEffect")
-  }, [])
 
   return (
     <main>
@@ -137,7 +136,7 @@ const UserProfile = () => {
               onInput={onInput}
               disabledText={disabledText}
               data={user}
-              splitWord={splitWord}
+              // splitWord={splitWord}
             />
           </section>
         </div>
