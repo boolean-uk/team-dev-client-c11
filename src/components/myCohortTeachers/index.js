@@ -6,8 +6,6 @@ import { useTranslation } from "react-i18next"
 const MyTeachers = ({ teachers }) => {
   const { t } = useTranslation()
 
-  console.log(teachers)
-
   return (
     <Card>
       <h3 className="my-cohort-teachers--header">{t("teachers")}</h3>
