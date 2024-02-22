@@ -9,23 +9,6 @@ async function register(email, password) {
   return await login(email, password)
 }
 
-async function createProfile(userId, firstName, lastName, githubUsername, biography, email, mobile,password,role,specialism, cohort,startDate, endDate, imageUrl) {
-  return await patch(`users/${userId}`, {
-    firstName,
-    lastName,
-    githubUsername,
-    biography,
-    email,
-    mobile,
-    password,
-    role,
-    specialism,
-    cohort,
-    startDate,
-    endDate,
-    imageUrl,
-  })
-}
 async function updateProfile(userId, firstName, lastName, githubUsername, biography, email, mobile,password,role,specialism, cohort,startDate, endDate, imageUrl) {
   return await put(`users/${userId}`, {
     firstName,
@@ -171,7 +154,6 @@ export {
   login,
   getPosts,
   register,
-  createProfile,
   updateProfile,
   getUsers,
   postPost,
