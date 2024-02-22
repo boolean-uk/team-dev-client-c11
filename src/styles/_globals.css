@@ -111,3 +111,9 @@ code {
 .relative{
   position: relative;
 }
+.flex {
+  display: flex;
+}
+.gap-20 {
+  gap: 20px;
+}
