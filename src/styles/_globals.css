@@ -111,6 +111,9 @@ code {
 .relative{
   position: relative;
 }
+.pointer{
+  cursor: pointer;
+}
 .flex {
   display: flex;
 }
