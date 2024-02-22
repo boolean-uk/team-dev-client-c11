@@ -9,12 +9,38 @@ async function register(email, password) {
   return await login(email, password)
 }
 
-async function createProfile(userId, firstName, lastName, githubUrl, bio) {
+async function createProfile(userId, firstName, lastName, githubUsername, biography, email, mobile,password,role,specialism, cohort,startDate, endDate, imageUrl) {
   return await patch(`users/${userId}`, {
     firstName,
     lastName,
-    githubUrl,
-    bio,
+    githubUsername,
+    biography,
+    email,
+    mobile,
+    password,
+    role,
+    specialism,
+    cohort,
+    startDate,
+    endDate,
+    imageUrl,
+  })
+}
+async function updateProfile(userId, firstName, lastName, githubUsername, biography, email, mobile,password,role,specialism, cohort,startDate, endDate, imageUrl) {
+  return await put(`users/${userId}`, {
+    firstName,
+    lastName,
+    githubUsername,
+    biography,
+    email,
+    mobile,
+    password,
+    role,
+    specialism,
+    cohort,
+    startDate,
+    endDate,
+    imageUrl,
   })
 }
 
@@ -146,6 +172,7 @@ export {
   getPosts,
   register,
   createProfile,
+  updateProfile,
   getUsers,
   postPost,
   getUserByName,
