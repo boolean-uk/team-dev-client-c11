@@ -74,7 +74,6 @@ const AuthProvider = ({ children }) => {
         getSelfTeacher().then(setLoggedInTeacher)
         return
       }
-      throw Error("No role assigned to this user")
     }
 
     if (userRole && userRole !== 'TBA') {
