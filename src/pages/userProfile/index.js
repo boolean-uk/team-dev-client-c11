@@ -21,7 +21,7 @@ const UserProfile = () => {
   const { id } = useParams()
   const [disabledText, setDisabledText] = useState(true)
   const [saveButton, setSave] = useState(false)
-  const [isTeacher, setIsTeacher] = useState(true)
+  const [isTeacher] = useState(true)
   const [user, setUser] = useState()
   const [profile, setProfile] = useState({
     firstName: "",
