@@ -4,9 +4,13 @@ import HomeIcon from "../../assets/icons/homeIcon"
 import ProfileIcon from "../../assets/icons/profileIcon"
 import "./style.css"
 import { useTranslation } from "react-i18next"
+import { useContext } from "react"
+import { AuthContext } from "../../context/auth"
 
 const Navigation = () => {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
+  const userId = useContext(AuthContext).userId
+
   return (
     <nav>
       <ul>
@@ -17,7 +21,7 @@ const Navigation = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/">
+          <NavLink to={`/profile/${userId}`}>
             <ProfileIcon />
             <p>{t("profile")}</p>
           </NavLink>
