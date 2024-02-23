@@ -91,6 +91,7 @@ const UserProfile = () => {
       user.endDate,
       user.imageUrl
     )
+    setTempUser(user)
     console.log("save")
     return
   }
