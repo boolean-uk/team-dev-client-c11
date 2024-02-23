@@ -54,7 +54,7 @@ async function postComment(comment) {
 
 async function getCohorts() {
   const res = await get("cohorts")
-  return res.data 
+  return res.data
 }
 
 async function getTeachers() {
@@ -96,8 +96,12 @@ async function getUsers() {
 }
 
 async function getUserById(userId) {
-    return get(`users/${userId}`)
-  }
+  return get(`users/${userId}`)
+}
+
+async function getUserProfileById(userId) {
+  return get(`users/profile/${userId}`)
+}
 
 async function put(endpoint, data, auth = true) {
   return await request("PUT", endpoint, data, auth)
@@ -142,7 +146,7 @@ async function toggleLike(postId) {
 }
 
 async function getStudents() {
-  const response = await get('students')
+  const response = await get("students")
   return response.data.students
 }
 
@@ -166,5 +170,6 @@ export {
   getUserById,
   getStudents,
   getSelfTeacher,
-  getSelfStudent
+  getSelfStudent,
+  getUserProfileById
 }

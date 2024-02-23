@@ -1,0 +1,43 @@
+.profile-information {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+}
+
+.welcome-formheader {
+  border-top: solid rgba(128, 128, 128, 0.226) 2px;
+  margin-top: 20px;
+  padding-top: 20px;
+}
+
+.welcome {
+  margin-bottom: 20px;
+}
+
+.profile-buttons {
+  display: grid;
+  grid-template-columns: 170px 170px;
+  gap: 20px;
+  justify-content: end;
+}
+
+.profile-buttons > button {
+  background-color:  #F0F5FA;
+  color: #64648C;
+  cursor: pointer;
+}
+
+.profile-buttons > .saveButton {
+  background-color:  #000046;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.locked-input form input {
+  background: white;
+  color: black;
+}
+
+.locked-input textarea {
+  background: white;
+  color: black;
+}
