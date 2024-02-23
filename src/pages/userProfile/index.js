@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next"
 import Card from "../../components/card"
 import ProfileCircle from "../../components/profileCircle"
 import "./style.css"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import {
   getUserById,
@@ -15,8 +15,10 @@ import ContactInfo from "../../components/contactInfo"
 import TrainingInfo from "../../components/trainingInfo"
 import Bio from "../../components/bio"
 import ProfessionalInfo from "../../components/professionalinfo"
+import { AuthContext } from "../../context/auth"
 
 const UserProfile = () => {
+  const currentUserId = useContext(AuthContext).userId
   const { t } = useTranslation()
   const { id } = useParams()
   const [disabledText, setDisabledText] = useState(true)
@@ -51,12 +53,6 @@ const UserProfile = () => {
     })
   }, [id])
 
-  console.log("ID....", id)
-  console.log("TEMP USER....", tempUser)
-  console.log("Profile....", profile)
-  console.log("User....", user)
-
-
   const initials =
     profile && profile.firstName && profile.lastName
       ? `${profile.firstName.charAt(0)}${profile.lastName.charAt(0)}`
@@ -77,7 +73,6 @@ const UserProfile = () => {
       [name]: value,
     })
   }
-
 
   const revert = () => {
     setProfile(tempUser)
@@ -105,6 +100,44 @@ const UserProfile = () => {
     setTempUser(profile)
     console.log("save")
     return
+  }
+
+  const checkCurrentUser = () => {
+    console.log("CURRENT ID", currentUserId, "PROFILE ID", id)
+    if (Number(currentUserId) === Number(id)) {
+      return (
+        <div className="profile-buttons">
+          <Button
+            text={t("cancel")}
+            onClick={() => {
+              setSave(false)
+              setDisabledText(true)
+              revert()
+            }}
+          />
+
+          {saveButton ? (
+            <Button
+              classes="saveButton"
+              text={t("save")}
+              onClick={() => {
+                setSave(false)
+                setDisabledText(true)
+                save()
+              }}
+            />
+          ) : (
+            <Button
+              text={t("edit")}
+              onClick={() => {
+                setSave(true)
+                setDisabledText(false)
+              }}
+            />
+          )}
+        </div>
+      )
+    }
   }
 
   return (
@@ -170,37 +203,7 @@ const UserProfile = () => {
         </div>
 
         <p className="text-blue1">{`*${t("required")}`}</p>
-
-        <div className="profile-buttons">
-          <Button
-            text={t("cancel")}
-            onClick={() => {
-              setSave(false)
-              setDisabledText(true)
-              revert()
-            }}
-          />
-
-          {saveButton ? (
-            <Button
-              classes="saveButton"
-              text={t("save")}
-              onClick={() => {
-                setSave(false)
-                setDisabledText(true)
-                save()
-              }}
-            />
-          ) : (
-            <Button
-              text={t("edit")}
-              onClick={() => {
-                setSave(true)
-                setDisabledText(false)
-              }}
-            />
-          )}
-        </div>
+        {checkCurrentUser()}
       </Card>
     </main>
   )
