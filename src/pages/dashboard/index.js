@@ -22,6 +22,8 @@ import { AuthContext } from "../../context/auth"
 import LoggedInUser from "../../components/loggedInUser"
 
 import useAuth from "../../hooks/useAuth"
+import MyCohortName from "../../components/myCohortName/myCohortName"
+
 
 const Dashboard = () => {
   const { t } = useTranslation()
@@ -106,6 +108,7 @@ const Dashboard = () => {
   const showMyCohort = () => {
     return (
       <Card header={t("myCohort")}>
+       <MyCohortName/>
         <UsersList users={myCohort} />
       </Card>
     )

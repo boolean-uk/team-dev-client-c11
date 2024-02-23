@@ -108,6 +108,8 @@ const AuthProvider = ({ children }) => {
     setToken(null)
     setUserId(null)
     setUserRole(null)
+    setLoggedInStudent(null)
+    setLoggedInTeacher(null)
   }
 
   const checkPassword = (password) => {
