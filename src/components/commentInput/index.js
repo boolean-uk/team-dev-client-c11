@@ -1,5 +1,4 @@
 import { useState } from "react"
-import ProfileCircle from "../profileCircle"
 import "./style.css"
 import sendIcon from "../../assets/icons/send.png"
 import { postComment } from "../../service/apiClient"
