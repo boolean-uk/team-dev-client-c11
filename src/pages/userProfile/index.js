@@ -4,7 +4,11 @@ import ProfileCircle from "../../components/profileCircle"
 import "./style.css"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { getUserById, getUserProfileById, updateProfile } from "../../service/apiClient.js"
+import {
+  getUserById,
+  getUserProfileById,
+  updateProfile,
+} from "../../service/apiClient.js"
 import Button from "../../components/button"
 import BasicInfo from "../../components/basic-info"
 import ContactInfo from "../../components/contactInfo"
@@ -13,6 +17,7 @@ import Bio from "../../components/bio"
 import ProfessionalInfo from "../../components/professionalinfo"
 
 const UserProfile = () => {
+  const { t } = useTranslation()
   const { id } = useParams()
   const [disabledText, setDisabledText] = useState(true)
   const [saveButton, setSave] = useState(false)
@@ -33,17 +38,7 @@ const UserProfile = () => {
     endDate: "",
     imageUrl: "",
   })
-
-  
-  if(user.role === "TBA"){setIsTeacher(false)}
-  if(user.role === "STUDENT"){setIsTeacher(false)}
-  if(user.role === "TEACHER"){setIsTeacher(true)}
-
   const [tempUser, setTempUser] = useState(profile)
-  console.log("ID....", id)
-  console.log("TEMP USER....", tempUser)
-  console.log("Profile....", profile)
-  console.log("User....",user)
 
   useEffect(() => {
     getUserProfileById(id).then((profile) => {
@@ -52,10 +47,15 @@ const UserProfile = () => {
     })
 
     getUserById(id).then((user) => {
-      setUser(user)
+      setUser(user.data.user)
     })
-
   }, [id])
+
+  console.log("ID....", id)
+  console.log("TEMP USER....", tempUser)
+  console.log("Profile....", profile)
+  console.log("User....", user)
+
 
   const initials =
     profile && profile.firstName && profile.lastName
@@ -78,7 +78,6 @@ const UserProfile = () => {
     })
   }
 
-  const { t } = useTranslation()
 
   const revert = () => {
     setProfile(tempUser)
@@ -118,8 +117,10 @@ const UserProfile = () => {
         <div className="profile-information">
           <ProfileCircle initials={initials} />
           <section>
-            <h4>{profile.firstName} {profile.lastName}</h4>
-            <p>{user.title}</p>
+            <h4>
+              {profile.firstName} {profile.lastName}
+            </h4>
+            {/* <p>{user.title}</p> */}
           </section>
         </div>
 
