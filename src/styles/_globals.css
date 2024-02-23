@@ -111,3 +111,12 @@ code {
 .relative{
   position: relative;
 }
+.pointer{
+  cursor: pointer;
+}
+.flex {
+  display: flex;
+}
+.gap-20 {
+  gap: 20px;
+}

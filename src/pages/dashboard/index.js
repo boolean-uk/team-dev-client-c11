@@ -21,16 +21,18 @@ import StudentsList from "../../components/studentsList"
 import { AuthContext } from "../../context/auth"
 import LoggedInUser from "../../components/loggedInUser"
 
+import useAuth from "../../hooks/useAuth"
 
 const Dashboard = () => {
   const { t } = useTranslation()
   const cohortId = useContext(AuthContext).loggedInStudent?.cohortId
-  
-  const [posts, setPosts] = useState([])
-  const [myCohort, setMyCohort] = useState([])
+  const { userRole } = useAuth()
+
+  const [posts, setPosts] = useState(null)
+  const [myCohort, setMyCohort] = useState(null)
   const [cohorts, setCohorts] = useState(null)
-  const [teachers, setTeachers] = useState([])
-  const [students, setStudents] = useState([])
+  const [teachers, setTeachers] = useState(null)
+  const [students, setStudents] = useState(null)
 
   const sortPosts = (fetchedPosts) => {
     const sortedPosts = fetchedPosts.sort(
@@ -69,11 +71,17 @@ const Dashboard = () => {
   }, [])
 
   useEffect(() => {
+    if (userRole === "STUDENT" && cohortId) {
+      getMyCohort(cohortId)
+    }
+
+    if (userRole === "TEACHER") {
+      getAllCohorts()
+      getAllTeachers()
+      getAllStudents()
+    }
+
     getAllPosts()
-    cohortId && getMyCohort(cohortId)
-    getAllCohorts()
-    getAllTeachers()
-    getAllStudents()
   }, [
     getAllPosts,
     getMyCohort,
@@ -81,6 +89,7 @@ const Dashboard = () => {
     getAllTeachers,
     getAllStudents,
     cohortId,
+    userRole,
   ])
 
   const { openModal, setModal } = useModal()
@@ -94,24 +103,34 @@ const Dashboard = () => {
     openModal()
   }
 
-  const shouldRenderList = (list) => Array.isArray(list)
-
-  const showAllCohortsOrMine = () => {
-    if (shouldRenderList(cohorts)) {
-      return (
-        <>
-          <Card header={t("Cohorts")}>
-            <CohortList cohorts={cohorts} />
-          </Card>
-          <Card header={t("Students")}>
-            <StudentsList students={students} />
-          </Card>
-        </>
-      )
-    }
+  const showMyCohort = () => {
     return (
       <Card header={t("myCohort")}>
         <UsersList users={myCohort} />
+      </Card>
+    )
+  }
+
+  const showAllCohorts = () => {
+    return (
+      <Card header={t("Cohorts")}>
+        <CohortList cohorts={cohorts} />
+      </Card>
+    )
+  }
+
+  const showAllStudents = () => {
+    return (
+      <Card header={t("Students")}>
+        <StudentsList students={students} />
+      </Card>
+    )
+  }
+
+  const showAllTeachers = () => {
+    return (
+      <Card header={t("Teachers")}>
+        <TeacherList teachers={teachers} />
       </Card>
     )
   }
@@ -128,14 +147,19 @@ const Dashboard = () => {
           </div>
         </Card>
 
-        <Posts posts={posts} getAllPosts={getAllPosts} />
+        {posts ? (
+          <Posts posts={posts} getAllPosts={getAllPosts} />
+        ) : (
+          <p>Loading...</p>
+        )}
       </main>
       <aside>
         <SearchUserAside />
-        {showAllCohortsOrMine()}
-        <Card header={t("Teachers")}>
-          <TeacherList teachers={teachers} />
-        </Card>
+
+        {cohorts && showAllCohorts()}
+        {students && showAllStudents()}
+        {myCohort && showMyCohort()}
+        {teachers && showAllTeachers()}
       </aside>
     </>
   )
