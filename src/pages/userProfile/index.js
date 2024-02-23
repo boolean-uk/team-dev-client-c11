@@ -16,7 +16,7 @@ const UserProfile = () => {
   const { id } = useParams()
   const [disabledText, setDisabledText] = useState(true)
   const [saveButton, setSave] = useState(false)
-  const [isTeacher, setisTeacher] = useState(false)
+  const [isTeacher, setisTeacher] = useState(true)
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
@@ -40,10 +40,8 @@ const UserProfile = () => {
 
   useEffect(() => {
     getUserProfileById(id).then((user) => {
-      setUser(user.data.user)
-      setTempUser(user.data.user)
-      console.log("USE EFFECT RUNNING")
-      console.log("USER INFO INSIDE CALLBACK....", user.data.user)
+      setUser(user.data.profile)
+      setTempUser(user.data.profile)
     })
   }, [id])
 
@@ -107,7 +105,7 @@ const UserProfile = () => {
         <div className="profile-information">
           <ProfileCircle initials={initials} />
           <section>
-            <h4>{/* {user.firstName} {user.lastName} */}</h4>
+            <h4>{user.firstName} {user.lastName}</h4>
             <p>{user.title}</p>
           </section>
         </div>
