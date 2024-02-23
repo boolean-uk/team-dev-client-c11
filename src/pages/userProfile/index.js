@@ -2,9 +2,9 @@ import { useTranslation } from "react-i18next"
 import Card from "../../components/card"
 import ProfileCircle from "../../components/profileCircle"
 import "./style.css"
-import { useCallback, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { getUserProfileById } from "../../service/apiClient.js"
+import { getUserProfileById, updateProfile } from "../../service/apiClient.js"
 import Button from "../../components/button"
 import BasicInfo from "../../components/basic-info"
 import ContactInfo from "../../components/contactInfo"
@@ -37,7 +37,7 @@ const UserProfile = () => {
   console.log("ID....", id)
   console.log("TEMP USER....", tempUser)
   console.log("USER....", user)
-  
+
   useEffect(() => {
     getUserProfileById(id).then((user) => {
       setUser(user.data.user)
@@ -46,7 +46,6 @@ const UserProfile = () => {
       console.log("USER INFO INSIDE CALLBACK....", user.data.user)
     })
   }, [id])
-
 
   const initials =
     user && user.firstName && user.lastName
@@ -78,6 +77,22 @@ const UserProfile = () => {
   }
 
   const save = () => {
+    updateProfile(
+      id,
+      user.firstName,
+      user.lastName,
+      user.githubUsername,
+      user.bio,
+      user.email,
+      user.mobile,
+      user.password,
+      user.role,
+      user.specialism,
+      user.cohort,
+      user.startDate,
+      user.endDate,
+      user.imageUrl
+    )
     console.log("save")
     return
   }
@@ -92,9 +107,7 @@ const UserProfile = () => {
         <div className="profile-information">
           <ProfileCircle initials={initials} />
           <section>
-            <h4>
-              {/* {user.firstName} {user.lastName} */}
-            </h4>
+            <h4>{/* {user.firstName} {user.lastName} */}</h4>
             <p>{user.title}</p>
           </section>
         </div>
