@@ -4,7 +4,7 @@ import ProfileCircle from "../../components/profileCircle"
 import "./style.css"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { getUserProfileById, updateProfile } from "../../service/apiClient.js"
+import { getUserById, getUserProfileById, updateProfile } from "../../service/apiClient.js"
 import Button from "../../components/button"
 import BasicInfo from "../../components/basic-info"
 import ContactInfo from "../../components/contactInfo"
@@ -16,8 +16,9 @@ const UserProfile = () => {
   const { id } = useParams()
   const [disabledText, setDisabledText] = useState(true)
   const [saveButton, setSave] = useState(false)
-  const [isTeacher, setisTeacher] = useState(true)
-  const [user, setUser] = useState({
+  const [isTeacher, setIsTeacher] = useState(true)
+  const [user, setUser] = useState()
+  const [profile, setProfile] = useState({
     firstName: "",
     lastName: "",
     githubUsername: "",
@@ -33,21 +34,32 @@ const UserProfile = () => {
     imageUrl: "",
   })
 
-  const [tempUser, setTempUser] = useState(user)
+  
+  if(user.role === "TBA"){setIsTeacher(false)}
+  if(user.role === "STUDENT"){setIsTeacher(false)}
+  if(user.role === "TEACHER"){setIsTeacher(true)}
+
+  const [tempUser, setTempUser] = useState(profile)
   console.log("ID....", id)
   console.log("TEMP USER....", tempUser)
-  console.log("USER....", user)
+  console.log("Profile....", profile)
+  console.log("User....",user)
 
   useEffect(() => {
-    getUserProfileById(id).then((user) => {
-      setUser(user.data.profile)
-      setTempUser(user.data.profile)
+    getUserProfileById(id).then((profile) => {
+      setProfile(profile.data.profile)
+      setTempUser(profile.data.profile)
     })
+
+    getUserById(id).then((user) => {
+      setUser(user)
+    })
+
   }, [id])
 
   const initials =
-    user && user.firstName && user.lastName
-      ? `${user.firstName.charAt(0)}${user.lastName.charAt(0)}`
+    profile && profile.firstName && profile.lastName
+      ? `${profile.firstName.charAt(0)}${profile.lastName.charAt(0)}`
       : "A"
 
   let classes = ""
@@ -55,13 +67,13 @@ const UserProfile = () => {
     classes = "locked-input"
   }
 
-  // const splitWord = user.bio.trim(/\s+/g, "").length
+  // const splitWord = profile.bio.trim(/\s+/g, "").length
 
   const onInput = (event) => {
     const { name, value } = event.target
 
-    setUser({
-      ...user,
+    setProfile({
+      ...profile,
       [name]: value,
     })
   }
@@ -69,7 +81,7 @@ const UserProfile = () => {
   const { t } = useTranslation()
 
   const revert = () => {
-    setUser(tempUser)
+    setProfile(tempUser)
     console.log("revert")
     return
   }
@@ -77,21 +89,21 @@ const UserProfile = () => {
   const save = () => {
     updateProfile(
       id,
-      user.firstName,
-      user.lastName,
-      user.githubUsername,
-      user.bio,
-      user.email,
-      user.mobile,
-      user.password,
-      user.role,
-      user.specialism,
-      user.cohort,
-      user.startDate,
-      user.endDate,
-      user.imageUrl
+      profile.firstName,
+      profile.lastName,
+      profile.githubUsername,
+      profile.bio,
+      profile.email,
+      profile.mobile,
+      profile.password,
+      profile.role,
+      profile.specialism,
+      profile.cohort,
+      profile.startDate,
+      profile.endDate,
+      profile.imageUrl
     )
-    setTempUser(user)
+    setTempUser(profile)
     console.log("save")
     return
   }
@@ -106,7 +118,7 @@ const UserProfile = () => {
         <div className="profile-information">
           <ProfileCircle initials={initials} />
           <section>
-            <h4>{user.firstName} {user.lastName}</h4>
+            <h4>{profile.firstName} {profile.lastName}</h4>
             <p>{user.title}</p>
           </section>
         </div>
@@ -116,7 +128,7 @@ const UserProfile = () => {
             <BasicInfo
               onInput={onInput}
               disabledText={disabledText}
-              data={user}
+              data={profile}
             />
           </section>
 
@@ -125,7 +137,7 @@ const UserProfile = () => {
               <ProfessionalInfo
                 onInput={onInput}
                 disabledText={disabledText}
-                data={user}
+                data={profile}
               />
             </section>
           ) : (
@@ -133,7 +145,7 @@ const UserProfile = () => {
               <TrainingInfo
                 onInput={onInput}
                 disabledText={disabledText}
-                data={user}
+                data={profile}
               />
             </section>
           )}
@@ -142,7 +154,7 @@ const UserProfile = () => {
             <ContactInfo
               onInput={onInput}
               disabledText={disabledText}
-              data={user}
+              data={profile}
             />
           </section>
 
@@ -150,7 +162,7 @@ const UserProfile = () => {
             <Bio
               onInput={onInput}
               disabledText={disabledText}
-              data={user}
+              data={profile}
               // splitWord={splitWord}
             />
           </section>
