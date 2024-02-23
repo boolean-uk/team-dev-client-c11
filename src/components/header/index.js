@@ -9,6 +9,8 @@ import { NavLink } from "react-router-dom"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import LanguageSelect from "../languageSelect"
+import LoggedInUser from "../loggedInUser"
+import UserName from "../userName"
 
 const Header = () => {
   const { t } = useTranslation()
@@ -43,20 +45,18 @@ const Header = () => {
       >
         <LanguageSelect />
         <div className="profile-icon" onClick={onClickProfileIcon}>
-          <p>AJ</p>
+        <LoggedInUser/>
         </div>
       </div>
-
       {isMenuVisible && (
         <div className="user-panel">
           <Card>
             <section className="post-details">
               <div className="profile-icon">
-                <p>AJ</p>
+               <LoggedInUser/>
               </div>
-
               <div className="post-user-name">
-                <p>Alex Jameson</p>
+               <UserName/>
                 <small>Software Developer, Cohort 3</small>
               </div>
             </section>

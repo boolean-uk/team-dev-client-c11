@@ -4,6 +4,10 @@ import "./style.css"
 import { deletePost, editPost } from "../../service/apiClient.js"
 import { useTranslation } from "react-i18next"
 import { Trans } from "react-i18next"
+import LoggedInUser from "../loggedInUser"
+import UserName from "../userName"
+
+
 
 const EditPostModal = ({ postId, getAllPosts, setPostContent }) => {
   const { t } = useTranslation()
@@ -63,10 +67,10 @@ const EditPostModal = ({ postId, getAllPosts, setPostContent }) => {
     <>
       <section className="create-post-user-details">
         <div className="profile-icon">
-          <p>AJ</p>
+         <LoggedInUser/>
         </div>
         <div className="post-user-name">
-          <p>Alex J</p>
+         <UserName/>
         </div>
       </section>
 

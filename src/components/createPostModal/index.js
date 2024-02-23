@@ -5,6 +5,10 @@ import Button from "../button";
 import useAuth from "../../hooks/useAuth"
 import { postPost } from "../../service/apiClient";
 import { useTranslation } from "react-i18next";
+import LoggedInUser from "../loggedInUser";
+import UserName from "../userName";
+
+
 
 const CreatePostModal = ({ getAllPosts }) => {
   // Use the useModal hook to get the closeModal function so we can close the modal on user interaction
@@ -45,10 +49,10 @@ const CreatePostModal = ({ getAllPosts }) => {
     <>
       <section className="create-post-user-details">
         <div className="profile-icon">
-          <p>AJ</p>
+        <LoggedInUser/>
         </div>
         <div className="post-user-name">
-          <p>Alex J</p>
+         <UserName/>
         </div>
       </section>
       <section>

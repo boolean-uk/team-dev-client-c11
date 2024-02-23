@@ -1,9 +1,9 @@
 import { useState } from "react"
-import ProfileCircle from "../profileCircle"
 import "./style.css"
 import sendIcon from "../../assets/icons/send.png"
 import { postComment } from "../../service/apiClient"
 import { useTranslation } from "react-i18next"
+import LoggedInUser from "../loggedInUser"
 
 const CommentInput = ({ postId, refreshAllComments }) => {
   const { t } = useTranslation()
@@ -21,7 +21,7 @@ const CommentInput = ({ postId, refreshAllComments }) => {
 
   return (
     <section className="commentInput">
-      <ProfileCircle initials="AJ" />
+      <LoggedInUser/>
       <form onSubmit={submitHandler} className="commentInput__content">
         <input
           type="text"
