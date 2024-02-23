@@ -53,6 +53,9 @@ const UserProfile = () => {
     })
   }, [id])
 
+  console.log("USER INFORMATION ---->", user)
+  console.log("PROFILE INFORMATION ---->", profile)
+
   const initials =
     profile && profile.firstName && profile.lastName
       ? `${profile.firstName.charAt(0)}${profile.lastName.charAt(0)}`
