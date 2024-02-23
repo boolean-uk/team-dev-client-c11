@@ -5,11 +5,11 @@ import Modal from "../components/modal"
 import Navigation from "../components/navigation"
 import useAuth from "../hooks/useAuth"
 import {
-  createProfile,
   getSelfStudent,
   getSelfTeacher,
   login,
   register,
+  updateProfile,
 } from "../service/apiClient"
 import jwtDecode from "jwt-decode"
 
@@ -74,10 +74,9 @@ const AuthProvider = ({ children }) => {
         getSelfTeacher().then(setLoggedInTeacher)
         return
       }
-      throw Error("No role assigned to this user")
     }
 
-    if (userRole) {
+    if (userRole && userRole !== 'TBA') {
       getAndSetStudentOrTeacher(userRole)
     }
   }, [
@@ -148,7 +147,7 @@ const AuthProvider = ({ children }) => {
   ) => {
     const { userId } = jwtDecode(token)
 
-    await createProfile(
+    await updateProfile(
       userId,
       firstName,
       lastName,

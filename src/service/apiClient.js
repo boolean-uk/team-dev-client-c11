@@ -9,12 +9,21 @@ async function register(email, password) {
   return await login(email, password)
 }
 
-async function createProfile(userId, firstName, lastName, githubUrl, bio) {
-  return await patch(`users/${userId}`, {
+async function updateProfile(userId, firstName, lastName, githubUsername, biography, email, mobile,password,role,specialism, cohort,startDate, endDate, imageUrl) {
+  return await put(`users/${userId}`, {
     firstName,
     lastName,
-    githubUrl,
-    bio,
+    githubUsername,
+    biography,
+    email,
+    mobile,
+    password,
+    role,
+    specialism,
+    cohort,
+    startDate,
+    endDate,
+    imageUrl,
   })
 }
 
@@ -70,10 +79,6 @@ async function getStudentsByCohortId(cohort_id) {
 
 async function post(endpoint, data, auth = true) {
   return await request("POST", endpoint, data, auth)
-}
-
-async function patch(endpoint, data, auth = true) {
-  return await request("PATCH", endpoint, data, auth)
 }
 
 async function get(endpoint, auth = true) {
@@ -149,7 +154,7 @@ export {
   login,
   getPosts,
   register,
-  createProfile,
+  updateProfile,
   getUsers,
   postPost,
   getUserByName,
