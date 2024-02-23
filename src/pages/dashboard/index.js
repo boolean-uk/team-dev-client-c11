@@ -19,6 +19,8 @@ import { useTranslation } from "react-i18next"
 import TeacherList from "../../components/teacherList"
 import StudentsList from "../../components/studentsList"
 import { AuthContext } from "../../context/auth"
+import LoggedInUser from "../../components/loggedInUser"
+
 
 const Dashboard = () => {
   const { t } = useTranslation()
@@ -120,7 +122,7 @@ const Dashboard = () => {
         <Card>
           <div className="create-post-input">
             <div className="profile-icon">
-              <p>AJ</p>
+             <LoggedInUser/>
             </div>
             <Button text={t("whatsOnYourMind")} onClick={showModal} />
           </div>
