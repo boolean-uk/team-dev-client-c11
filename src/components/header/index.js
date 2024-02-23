@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next"
 import LanguageSelect from "../languageSelect"
 import LoggedInUser from "../loggedInUser"
 import UserName from "../userName"
+import MyCohortName from "../myCohortName/myCohortName"
 
 const Header = () => {
   const { t } = useTranslation()
@@ -57,7 +58,7 @@ const Header = () => {
               </div>
               <div className="post-user-name">
                <UserName/>
-                <small>Software Developer, Cohort 3</small>
+                <small><MyCohortName/></small>
               </div>
             </section>
 
