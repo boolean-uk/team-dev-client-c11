@@ -42,19 +42,19 @@ const Welcome = () => {
 
   const onComplete = () => {
     onCreateProfile(
-      profile.photoUrl,
       profile.firstName,
       profile.lastName,
       profile.githubUsername,
       profile.bio,
-      profile.mobile,
       profile.email,
+      profile.mobile,
       profile.password,
       profile.role,
       profile.specialism,
       profile.cohort,
       profile.startDate,
-      profile.endDate
+      profile.endDate,
+      profile.imageUrl
     )
   }
 
