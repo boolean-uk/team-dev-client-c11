@@ -4,7 +4,7 @@ import ProfileCircle from "../../components/profileCircle"
 import "./style.css"
 import { useCallback, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { getUserById } from "../../service/apiClient.js"
+import { getUserProfileById } from "../../service/apiClient.js"
 import Button from "../../components/button"
 import BasicInfo from "../../components/basic-info"
 import ContactInfo from "../../components/contactInfo"
@@ -39,7 +39,7 @@ const UserProfile = () => {
   console.log("USER....", user)
   
   useEffect(() => {
-    getUserById(id).then((user) => {
+    getUserProfileById(id).then((user) => {
       setUser(user.data.user)
       setTempUser(user.data.user)
       console.log("USE EFFECT RUNNING")
