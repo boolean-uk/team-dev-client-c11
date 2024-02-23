@@ -81,10 +81,6 @@ async function post(endpoint, data, auth = true) {
   return await request("POST", endpoint, data, auth)
 }
 
-async function patch(endpoint, data, auth = true) {
-  return await request("PATCH", endpoint, data, auth)
-}
-
 async function get(endpoint, auth = true) {
   return await request("GET", endpoint, null, auth)
 }
